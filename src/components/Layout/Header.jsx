@@ -13,9 +13,57 @@ import PropTypes from "prop-types";
 import { TEXT } from "../../localization/en";
 import useLogout from "../../hooks/useLogout";
 import { getLocalStorage } from "../../utils/storage";
+import { privateRouteData } from "../../configs/route.config";
+import styled, { createGlobalStyle } from 'styled-components';
 
 const { Header } = Layout;
 const { Title } = Typography;
+
+const Nav = styled.nav`
+  display: flex;
+  width: 40%;
+  min-width: 550px;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+`;
+
+const NavButton = styled.a`
+  font-family: 'Martel Sans', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  position: relative;
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  color: white;
+  line-height: normal;
+  &:hover,
+  &:focus{
+    outline: none;
+    color: white;
+  }
+  &::after{
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 1.5px;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background-color: white;
+    transition: width 0.3s ease-in-out;
+    transform: translateX(-50%);
+  }
+  &:hover::after,
+  &:focus::after {
+  width: 95%;
+}
+`;
 
 function AppHeader({ title }) {
   const { logout } = useLogout();
@@ -35,14 +83,28 @@ function AppHeader({ title }) {
   );
 
   return (
-    <Header style={{ backgroundColor: "#0F2F56", paddingInline: "16px" }}>
+    <Header style={{ 
+      backgroundColor: "#0F2F56", 
+      "width": "100%",
+      "box-sizing": "border-box",
+      "height": "max-content",
+    }}>
       <Row justify="space-between" align="middle">
         <Col>
           <Title className="text-left pt-2 m-0" style={{ color: "#fff" }}>
-            {title}
+            VocalWave
           </Title>
         </Col>
-        <Col style={{ textAlign: "right" }}>
+        <Col>
+          <Nav>
+            {privateRouteData.map((item, index) => (
+                <NavButton key={index} href={item.path} style={title === item.title ? {color: "#46cce3"} : {color: "white"}}>
+                  {item.title.toUpperCase()}
+                </NavButton>
+            ))}
+          </Nav>
+        </Col>
+        <Col style={{ textAlign: "right", cursor: "pointer" }}>
           <Space size="large" style={{ alignItems: "start" }}>
             <Popover
               placement="left"

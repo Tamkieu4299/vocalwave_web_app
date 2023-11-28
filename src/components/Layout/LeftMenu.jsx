@@ -4,7 +4,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import logo from "../../assets/voiAds_logo.png";
 import { privateRouteData } from "../../configs/route.config";
 
-function LeftMenu({ setCollapsed }) {
+function  LeftMenu({ setCollapsed }) {
   const location = useLocation();
 
   const index = privateRouteData.findIndex(
