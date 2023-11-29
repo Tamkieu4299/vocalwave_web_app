@@ -73,8 +73,16 @@ function AppHeader({ title }) {
     <div>
       <Popconfirm placement="bottom" title={TEXT.confirm.confirm_logout}>
         <Space className="flex flex-col">
-          <Typography className="text-lg">{user?.name}</Typography>
-          <Button className="bg-primary text-white" onClick={logout}>
+          <Typography className="text-lg">{"Welcome, "}
+            <span style={{
+                color: "#46cce3",
+                textDecoration: "underline",
+                fontStyle: "italic"
+            }}>{user?.name}</span>
+          </Typography>
+          <Button className="bg-primary text-white" block="true" onClick={logout} style={{
+            width: "100%"
+          }}>
             {TEXT.button.logout}
           </Button>
         </Space>
@@ -115,9 +123,10 @@ function AppHeader({ title }) {
                 <Avatar
                   size={42}
                   style={{
-                    color: "#f56a00",
+                    color: "#46cce3",
                     backgroundColor: "#fde3cf",
                     marginBottom: "11px",
+                    fontWeight: "bold"
                   }}
                 >
                   {user?.name?.charAt(0)?.toUpperCase()}
