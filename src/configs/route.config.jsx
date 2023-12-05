@@ -50,6 +50,11 @@ const loginPage = {
   component: lazy(() => delayRoute()(import("../modules/auth/features/login"))),
 };
 
+const registerPage = {
+  path: "auth/register",
+  component: lazy(() => delayRoute()(import("../modules/auth/features/register"))),
+};
+
 //Private Route
 const homePage = {
   path: "/",
@@ -82,7 +87,7 @@ const playlistPage = {
   icon: <UnorderedListOutlined />,
 };
 
-export const publicRoutesData = [loginPage];
+export const publicRoutesData = [loginPage, registerPage];
 export const privateRouteData = [homePage, driverPage, audioPage, playlistPage];
 
 const publicRoutes = () => {

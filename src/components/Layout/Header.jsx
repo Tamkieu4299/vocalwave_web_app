@@ -14,7 +14,8 @@ import { TEXT } from "../../localization/en";
 import useLogout from "../../hooks/useLogout";
 import { getLocalStorage } from "../../utils/storage";
 import { privateRouteData } from "../../configs/route.config";
-import styled, { createGlobalStyle } from 'styled-components';
+import { ExclamationCircleFilled } from '@ant-design/icons';
+import styled from 'styled-components';
 
 const { Header } = Layout;
 const { Title } = Typography;
@@ -71,22 +72,28 @@ function AppHeader({ title }) {
 
   const userProfileContent = (
     <div>
-      <Popconfirm placement="bottom" title={TEXT.confirm.confirm_logout}>
-        <Space className="flex flex-col">
+        <Space className="flex flex-col" style={{maxWidth: "200px", boxSizing: "border-box"}}>
           <Typography className="text-lg">{"Welcome, "}
-            <span style={{
+            <div style={{
                 color: "#46cce3",
                 textDecoration: "underline",
-                fontStyle: "italic"
-            }}>{user?.name}</span>
+                fontStyle: "italic",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                maxWidth: "100px",
+                display: "inline-block",
+                verticalAlign: "bottom"
+            }}>{user?.name}</div>
           </Typography>
-          <Button className="bg-primary text-white" block="true" onClick={logout} style={{
-            width: "100%"
-          }}>
-            {TEXT.button.logout}
-          </Button>
+          <Popconfirm placement="bottomRight" title={"Logout"} description={TEXT.confirm.confirm_logout} icon={<ExclamationCircleFilled style={{color: "red"}}/>} onConfirm={logout}>
+            <Button id="logout-btn" className="bg-primary text-white" block="true" onClick={(e) => e.preventDefault()} style={{
+              width: "100%",
+            }}>
+              {TEXT.button.logout}
+            </Button>
+          </Popconfirm>
         </Space>
-      </Popconfirm>
     </div>
   );
 
@@ -115,7 +122,7 @@ function AppHeader({ title }) {
         <Col style={{ textAlign: "right", cursor: "pointer" }}>
           <Space size="large" style={{ alignItems: "start" }}>
             <Popover
-              placement="left"
+              placement="bottomRight"
               content={userProfileContent}
               trigger="click"
             >
