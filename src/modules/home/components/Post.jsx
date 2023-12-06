@@ -4,7 +4,7 @@ import {
     Typography,
     Card
 } from "antd";
-import { formatDateDifference, formatDateTime } from "../../../utils/util";
+import { formatDateDifference } from "../../../utils/util";
 import { useState, useEffect, useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
 import { parse } from 'date-fns';
