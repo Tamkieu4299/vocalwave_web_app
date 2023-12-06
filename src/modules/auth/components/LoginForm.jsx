@@ -97,7 +97,7 @@ function LoginForm({ onSubmit, isLoading }) {
             label={<span style={labelStyle}>{AUTH_TEXT.passWord}</span>}
             rules={[{ required: true, message: TEXT.required.is_required }]}
           >
-            <Input.Password style={inputPasswordStyle}/>
+            <Input.Password className="inputPassword" style={inputPasswordStyle}/>
           </Form.Item>
           <Button type="submit" style={buttonStyle} htmlType="submit" loading={isLoading}>Log In</Button>
           <div style={{marginTop: "20px", textAlign: "center"}}>{"Don't have an account yet?"} <a style={{textDecoration: "underline", fontWeight: "bold"}} href="/auth/register">Sign Up</a></div>

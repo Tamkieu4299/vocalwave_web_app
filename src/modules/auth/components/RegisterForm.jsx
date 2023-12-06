@@ -1,4 +1,4 @@
-import { Button, Card, Form, Input} from "antd";
+import { Button, Card, Form, Input } from "antd";
 import PropTypes from "prop-types";
 import { AUTH_TEXT, MESSAGE } from "@/localization/en";
 import logo from "@/assets/voiAds_logo.png";
@@ -116,7 +116,7 @@ function RegisterForm({ onSubmit, isLoading = false }) {
               },
             ]}
           >
-            <Input.Password style={inputPasswordStyle}/>
+            <Input.Password className="inputPassword" style={inputPasswordStyle}/>
           </Form.Item>
           <Button type="submit" style={buttonStyle} htmlType="submit" loading={isLoading}>Sign Up</Button>
           <div style={{marginTop: "20px", textAlign: "center"}}>{"Already have an account?"} <a style={{textDecoration: "underline", fontWeight: "bold"}} href="/auth/login">Login</a></div>
