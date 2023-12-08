@@ -16,6 +16,7 @@ import { getLocalStorage } from "../../utils/storage";
 import { privateRouteData } from "../../configs/route.config";
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import styled from 'styled-components';
+import { NavLink } from "react-router-dom";
 
 const { Header } = Layout;
 const { Title } = Typography;
@@ -113,9 +114,9 @@ function AppHeader({ title }) {
         <Col>
           <Nav>
             {privateRouteData.map((item, index) => (
-                <NavButton key={index} href={item.path} style={title === item.title ? {color: "#46cce3"} : {color: "white"}}>
+                <NavLink key={index} to={item.path} style={title === item.title ? {color: "#46cce3"} : {color: "white"}}>
                   {item.title.toUpperCase()}
-                </NavButton>
+                </NavLink>
             ))}
           </Nav>
         </Col>
