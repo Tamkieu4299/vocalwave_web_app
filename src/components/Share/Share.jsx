@@ -13,7 +13,7 @@ import { getLocalStorage } from "../../utils/storage";
 
 export default function Share() {
     const user = getLocalStorage("tempUser");
-    // const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+    // const PF = "";
     const desc = useRef();
     const [file, setFile] = useState(null);
 
