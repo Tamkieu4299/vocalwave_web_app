@@ -86,3 +86,44 @@ button span {
   background-color: #0f2f56;
   padding: 5px 10px;
 }
+
+.nav-btn{
+  font-family: 'Martel Sans', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  position: relative;
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  color: white;
+  line-height: normal;
+}
+
+.nav-btn:hover,
+.nav-btn:focus{
+  outline: none;
+  color: white;
+}
+.nav-btn::after{
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 1.5px;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background-color: white;
+  transition: width 0.3s ease-in-out;
+  transform: translateX(-50%);
+}
+.nav-btn:hover::after,
+.nav-btn:focus::after {
+  width: 95%;
+}
+
+path{
+  color: inherit !important;
+}

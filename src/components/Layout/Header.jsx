@@ -31,42 +31,6 @@ const Nav = styled.nav`
   align-items: center;
 `;
 
-const NavButton = styled.a`
-  font-family: 'Martel Sans', sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  position: relative;
-  cursor: pointer;
-  background: none;
-  border: none;
-  outline: none;
-  margin: 0;
-  padding: 0;
-  color: white;
-  line-height: normal;
-  &:hover,
-  &:focus{
-    outline: none;
-    color: white;
-  }
-  &::after{
-    content: '';
-    display: block;
-    position: absolute;
-    bottom: 1.5px;
-    left: 50%;
-    width: 0;
-    height: 3px;
-    background-color: white;
-    transition: width 0.3s ease-in-out;
-    transform: translateX(-50%);
-  }
-  &:hover::after,
-  &:focus::after {
-  width: 95%;
-}
-`;
-
 function AppHeader({ title }) {
   const { logout } = useLogout();
   const user = getLocalStorage("tempUser");
@@ -114,7 +78,7 @@ function AppHeader({ title }) {
         <Col>
           <Nav>
             {privateRouteData.map((item, index) => (
-                <NavLink key={index} to={item.path} style={title === item.title ? {color: "#46cce3"} : {color: "white"}}>
+                <NavLink className="nav-btn" key={index} to={item.path} style={title === item.title ? {color: "#46cce3"} : {color: "white"}}>
                   {item.title.toUpperCase()}
                 </NavLink>
             ))}
