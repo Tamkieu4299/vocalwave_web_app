@@ -80,7 +80,7 @@ function RegisterForm({ onSubmit, isLoading = false }) {
           padding: '20px 0',
         }
       }>
-        <Form name="validate_other" layout="vertical" onFinish={onSubmit}>
+        <Form name="validate_other" layout="vertical" onFinish={onSubmit} className="registerForm">
           <img src={logo} alt="void-ads-logo" className="w-20 h-20 m-auto" />
           <Form.Item
             name="name"

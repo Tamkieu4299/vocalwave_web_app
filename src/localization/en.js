@@ -4,14 +4,20 @@ export const LABEL = {
   //Button
   button: {
     addNew: "Add new",
-    cancel: "cancel",
-    ok: "ok",
+    cancel: "Cancel",
+    ok: "Confirm",
   },
   //Empty
   emptyData: "No data",
   //Menu
   dashBoard: "News",
   audio: "Songs",
+  //Track table
+  trackTable: {
+    song: "Song",
+    playlist: "Playlist",
+    duration: "Duration"
+  }
 };
 
 // COMMON MESSAGE
@@ -42,8 +48,8 @@ export const TEXT = {
   button: {
     addNew: "Add New",
     edit: "Edit",
-    cancel: "cancel",
-    ok: "ok",
+    cancel: "Cancel",
+    ok: "Confirm",
     logout: "Logout",
   },
   driver: {
@@ -61,7 +67,7 @@ export const TEXT = {
   },
   audio: {
     audio: "audio",
-    audio_name: "Audio name",
+    audio_name: "Audio Name",
     price: "Price",
     durations: "Durations",
     link: "Link",

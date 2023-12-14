@@ -18,6 +18,27 @@ import { Button, Col, Row, Typography } from "antd";
 import useUpdateAudio from "../../services/useUpdateAudio";
 import usePermission from "../../../../hooks/usePermission";
 import { getLocalStorage } from "../../../../utils/storage";
+import TrackTable from "../../../../components/Table/TrackTable";
+
+const testTracklistData = [
+  {
+    name: 'Song 1',
+    artist: 'Artist 1',
+    playlistName: 'Playlist A',
+    duration: '03:45',
+  },
+  {
+    name: 'Song 2',
+    artist: 'Artist 2',
+    playlistName: 'Playlist B',
+    duration: '04:20',
+  },
+  {
+    name: 'Song 3',
+    artist: 'Artist 3',
+    duration: '02:55',
+  },
+];
 
 function AudioPage() {
   const [form] = useForm();
@@ -114,7 +135,7 @@ function AudioPage() {
         </Col>
         <Col span={12} className="text-right">
           {editPermission && (
-            <Button className="bg-primary" onClick={() => handleOpenDetail()}>
+            <Button className="backgroundThemeColor" onClick={() => handleOpenDetail()}>
               <Typography className="text-white">
                 {TEXT.button.addNew}
               </Typography>
@@ -141,12 +162,14 @@ function AudioPage() {
         confirmLoading={isCreate || isUpdate}
         okText={TEXT.button.ok}
         onCancel={onCancel}
-        okButtonProps={{ disabled: !editPermission, className: "bg-primary" }}
+        cancelButtonProps={{style: {padding: "0 15px"}}}
+        okButtonProps={{ disabled: !editPermission, className: "backgroundThemeColor", style: {padding: "0 15px"} }}
         cancelText={TEXT.button.cancel}
         width={600}
       >
         <ModalDetailAudio form={form} onSubmit={onSubmit} isNew={isNew} />
       </ModalContainer>
+      <TrackTable tracklist={testTracklistData}/>
     </>
   );
 }

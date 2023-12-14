@@ -18,9 +18,9 @@ function SearchDriver({ onSearch }) {
         allowClear
         width={"100%"}
         defaultValue={value}
-        placeholder="Filter by name"
-        enterButton
-        className="bg-primary rounded-lg mb-2"
+        placeholder="Search..."
+        size="large"
+        className="rounded-lg mb-2"
         onSearch={search}
       />
     </Col>

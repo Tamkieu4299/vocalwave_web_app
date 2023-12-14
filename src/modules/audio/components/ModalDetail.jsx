@@ -75,7 +75,13 @@ function ModalDetailAudio({ form, onSubmit, isNew }) {
             onChange={form.onChange}
             maxCount={1}
           >
-            <Button icon={<UploadOutlined />}>Click to Upload</Button>
+            <Button icon={<UploadOutlined className="themeColor"/>}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+            >Click to Upload</Button>
           </Upload>
         </Form.Item>
       )}
