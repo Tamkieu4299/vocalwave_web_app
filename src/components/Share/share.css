@@ -8,12 +8,13 @@
 }
 
 .shareWrapper {
-    padding: 10px;
+    padding: 24px;
 }
 
 .shareTop {
     display: flex;
     align-items: center;
+    gap: 12px;
 }
 
 .shareProfileImg {
@@ -27,6 +28,7 @@
 .shareInput {
     border: none;
     width: 80%;
+    font-family: 'Poppins', sans-serif;
 }
 
 .shareInput:focus {
@@ -34,7 +36,7 @@
 }
 
 .shareHr {
-    margin: 20px;
+    margin: 20px 0;
 }
 
 .shareBottom {
@@ -45,19 +47,20 @@
 
 .shareOptions {
     display: flex;
-    margin-left: 20px;
+    width: 50%;
+    justify-content: space-between;
 }
 
 .shareOption {
     display: flex;
     align-items: center;
-    margin-right: 15px;
     cursor: pointer;
+    gap: 5px;
 }
 
 .shareIcon {
     font-size: 18px;
-    margin-right: 3px;
+    color: #0f2f56 !important;
 }
 
 .shareOptionText {
@@ -72,7 +75,6 @@
     border-radius: 5px;
     background-color: green;
     font-weight: 500;
-    margin-right: 20px;
     cursor: pointer;
     color: white;
 }

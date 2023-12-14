@@ -6,13 +6,21 @@ import {
     EmojiEmotions,
     Cancel,
 } from "@material-ui/icons";
+import {
+    Avatar,
+    Row,
+    Typography,
+    Card
+} from "antd";
 import { useContext, useRef, useState } from "react";
 import axios from "axios";
 import { getLocalStorage } from "../../utils/storage";
+import { FileImageFilled } from '@ant-design/icons';
 
 
 export default function Share() {
     const user = getLocalStorage("tempUser");
+    console.log(user);
     // const PF = "";
     const desc = useRef();
     const [file, setFile] = useState(null);
@@ -39,25 +47,26 @@ export default function Share() {
         try {
             await axios.post("/posts", newPost);
             window.location.reload();
-        } catch (err) {}
+        } catch (err) {console.log("Error!");}
     };
 
     return (
         <div className="share">
             <div className="shareWrapper">
                 <div className="shareTop">
-                    <img
-                        className="shareProfileImg"
-                        // src={
-                        //     user.profilePicture
-                        //         ? PF + user.profilePicture
-                        //         : PF + "person/noAvatar.png"
-                        // }
-                        alt=""
-                    />
+                    <Avatar
+                        size={42}
+                        style={{
+                        color: "#46cce3",
+                        backgroundColor: "#fde3cf",
+                        fontWeight: "bold"
+                        }}
+                    >
+                        {user?.name?.charAt(0)?.toUpperCase()}
+                    </Avatar>
                     <input
                         placeholder={
-                            "What's in your mind " + user.name + "?"
+                            "What's in your mind, " + user?.name + "?"
                         }
                         className="shareInput"
                         ref={desc}
@@ -83,9 +92,10 @@ export default function Share() {
                             <PermMedia
                                 htmlColor="tomato"
                                 className="shareIcon"
+                                style={{color: "#0f2f56", marginRight: "3px"}}
                             />
                             <span className="shareOptionText">
-                                Photo or Video
+                                Media
                             </span>
                             <input
                                 style={{ display: "none" }}
@@ -96,22 +106,23 @@ export default function Share() {
                             />
                         </label>
                         <div className="shareOption">
-                            <Label htmlColor="blue" className="shareIcon" />
+                            <Label htmlColor="blue" className="shareIcon" style={{color: "#0f2f56"}}/>
                             <span className="shareOptionText">Tag</span>
                         </div>
                         <div className="shareOption">
-                            <Room htmlColor="green" className="shareIcon" />
+                            <Room htmlColor="green" className="shareIcon" style={{color: "#0f2f56"}}/>
                             <span className="shareOptionText">Location</span>
                         </div>
                         <div className="shareOption">
                             <EmojiEmotions
                                 htmlColor="goldenrod"
                                 className="shareIcon"
+                                style={{color: "#0f2f56"}}
                             />
                             <span className="shareOptionText">Feelings</span>
                         </div>
                     </div>
-                    <button className="shareButton" type="submit">
+                    <button className="shareButton" type="submit" style={{backgroundColor: "#0f2f56", padding: "10px 15px"}}>
                         Share
                     </button>
                 </form>
