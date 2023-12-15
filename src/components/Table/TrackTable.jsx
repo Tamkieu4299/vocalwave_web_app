@@ -10,10 +10,10 @@ const TrackTable = ({tracklist}) => {
             <>
                 <Track
                     key={index} 
-                    name={track.name}
-                    artist={track.artist}
-                    playlistName={track.playlistName || 'Unknown'}
-                    duration={track.duration}
+                    name={track.audio_name}
+                    artist={track.created_by}
+                    playlistName={track?.playlistName && 'Unknown'}
+                    duration={track.durations}
                 />   
                 <hr />
             </>

@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { Col, Row } from "antd";
 import { CustomerServiceFilled } from "@ant-design/icons";
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import { LABEL } from "../../localization/en";
 
 const centered = {
@@ -22,7 +23,6 @@ const subtitle = {
 }
 
 const Track = ({name, artist, playlistName = "Unknown", duration, isHeader = false}) => {
-  console.log(isHeader);
   return (
     <Row className={isHeader ? "trackHeader" : "track"} style={{alignItems: "center", padding: "15px 0"}}>
         {
@@ -56,9 +56,14 @@ const Track = ({name, artist, playlistName = "Unknown", duration, isHeader = fal
                                 width: "40px",
                                 height: "40px",
                                 borderRadius: "4px",
-                                cursor: "pointer"
+                                cursor: "pointer",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center"
                             }}
-                        />
+                        >
+                        <MusicNoteIcon />
+                        </div>
                     </Col>
                     <Col span={10}>
                         <div style={{...title, cursor: "pointer"}} className="underlinedWhenHovered">{name}</div>

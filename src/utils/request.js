@@ -117,7 +117,7 @@ function requestErrorHandler(error, next) {
   if (!isRequestError(error)) {
     return next();
   }
-  return displayErrorMessage("request failed");
+  return displayErrorMessage("Request Failed");
 }
 
 export function createHandlerChain(handlers = []) {

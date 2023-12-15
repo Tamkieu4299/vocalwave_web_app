@@ -151,6 +151,10 @@ svg, path{
   color: #0f2f56 !important;
 }
 
+.themeColor2 {
+  color: #46cce3 !important;
+}
+
 .backgroundThemeColor {
   background-color: #0f2f56 !important;
 }
@@ -171,4 +175,75 @@ svg, path{
 
 .underlinedWhenHovered:hover {
   text-decoration: underline;
+}
+
+.musicPlayer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 90px;
+  width: 100%;
+  padding: 0 20px;
+  background-color: #0f2f56;
+}
+
+
+input[type="range"] {
+  background-color: #fde3cf;
+  border-radius: 10px;
+  appearance: none;
+  width: 100%;
+  height: 5px;
+  transform: translateY(-6px);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; 
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #46cce3;
+  border-radius: 50%;
+  border: none;
+  height: 15px;
+  width: 15px;
+}
+
+input[type="range"]::-moz-range-thumb {
+  -webkit-appearance: none; 
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #46cce3;
+  border-radius: 50%;
+  border: none;
+  height: 15px;
+  width: 15px;
+}
+
+input[type="range"]::-webkit-slider-runnable-track, input[type="range"]::-moz-range-track{
+  background-color: #fde3cf;
+  border-radius: 10px;
+  height: 5px;
+}
+
+.milli{
+  color: white;
+  text-align: center;
+}
+
+.musicPlayerIcon{
+  color: #46cce3 !important;
+  width: 28px;
+  aspect-ratio: 1/1;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+}
+
+.musicPlayerIcon:hover{
+  scale: 1.2;
+}
+
+.musicPlayerIcon svg {
+  width: inherit !important;
+  height: inherit !important;
 }

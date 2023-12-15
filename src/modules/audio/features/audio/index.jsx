@@ -19,6 +19,8 @@ import useUpdateAudio from "../../services/useUpdateAudio";
 import usePermission from "../../../../hooks/usePermission";
 import { getLocalStorage } from "../../../../utils/storage";
 import TrackTable from "../../../../components/Table/TrackTable";
+import { list } from "postcss";
+import MusicPlayer from "../../../../components/MusicPlayer/MusicPlayer";
 
 const testTracklistData = [
   {
@@ -107,8 +109,6 @@ function AudioPage() {
 
     if (isNew) {
       const { file, ...payload } = value;
-
-      //handle form data
       const formData = new FormData();
       formData.append("file", file.file.originFileObj);
       formData.append(
@@ -169,7 +169,8 @@ function AudioPage() {
       >
         <ModalDetailAudio form={form} onSubmit={onSubmit} isNew={isNew} />
       </ModalContainer>
-      <TrackTable tracklist={testTracklistData}/>
+      <TrackTable tracklist={listAudio}/>
+      <MusicPlayer name={"Hello"} artist={"test"}/>
     </>
   );
 }
