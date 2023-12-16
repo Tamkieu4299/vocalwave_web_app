@@ -1,6 +1,7 @@
 import React from 'react'
 import { Layout, Col, Row } from "antd";
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
+import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 import { PlayCircleFilled, StepBackwardFilled, StepForwardFilled } from "@ant-design/icons";
 
 const { Footer } = Layout;
@@ -67,8 +68,12 @@ const MusicPlayer = ({name, artist, duration }) => {
                     </Col>
                 </Row>
             </Col>
-            <Col span={7}>
-
+            <Col span={3}/>
+            <Col span={4}>
+                <Row style={{alignItems: "center", gap: "10px", justifyContent: "flex-end"}}>
+                    <Col style={{color: "#fde3cf"}}><VolumeUpIcon /></Col>
+                    <Col span={20} style={{height: "21px", boxSizing: "border-box", display: "flex", alignItems: "center"}}><input type='range' /></Col>
+                </Row>
             </Col>
         </Row>
     </Footer>
