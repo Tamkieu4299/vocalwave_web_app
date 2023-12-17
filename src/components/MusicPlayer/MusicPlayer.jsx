@@ -3,6 +3,7 @@ import { Layout, Col, Row } from "antd";
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 import { PlayCircleFilled, StepBackwardFilled, StepForwardFilled, PauseCircleFilled } from "@ant-design/icons";
+import { formatDuration } from "../../utils/util";
 
 const { Footer } = Layout;
 
@@ -19,14 +20,6 @@ const subtitle = {
     width: "max-content",
     lineHeight: "16px"
 }
-
-const formatDuration = (secs) => {
-    const minutes = Math.floor(secs / 60);
-    const returnedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
-    const seconds = Math.floor(secs % 60);
-    const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
-    return `${returnedMinutes}:${returnedSeconds}`;
-  }
 
 const MusicPlayer = ({name, artist, duration, song }) => {
   const [isPlaying, setIsPlaying] = useState(false); 
@@ -67,6 +60,7 @@ const MusicPlayer = ({name, artist, duration, song }) => {
 
   const changePlayerCurrentTime = () => {
     progressBar.current.style.setProperty('--seek-before-width', `${progressBar.current.value / curDuration * 100}%`)
+    animationRef.current = requestAnimationFrame(changePlayerCurrentTime);
     setCurrentTime(progressBar.current.value);
   }
 
