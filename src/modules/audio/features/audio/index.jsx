@@ -21,6 +21,7 @@ import { getLocalStorage } from "../../../../utils/storage";
 import TrackTable from "../../../../components/Table/TrackTable";
 import { list } from "postcss";
 import MusicPlayer from "../../../../components/MusicPlayer/MusicPlayer";
+import moonlight from '../../../../assets/moonlight.mp3'
 
 const testTracklistData = [
   {
@@ -170,7 +171,7 @@ function AudioPage() {
         <ModalDetailAudio form={form} onSubmit={onSubmit} isNew={isNew} />
       </ModalContainer>
       <TrackTable tracklist={listAudio}/>
-      <MusicPlayer name={"Hello"} artist={"test"}/>
+      <MusicPlayer name={"Hello"} artist={"test"} song={moonlight}/>
     </>
   );
 }
