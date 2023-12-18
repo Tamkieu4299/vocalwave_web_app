@@ -190,7 +190,6 @@ svg, path{
 
 input[type="range"] {
   --seek-before-width: 0;
-  --seek-before-color: #fde3cf;
   align-items: center;
   appearance: none;
   background: none;
@@ -208,7 +207,7 @@ input[type="range"]::before {
   height: 2.5px;
   width: var(--seek-before-width);
   max-width: 99%;
-  background-color: var(--seek-before-color);
+  background-color: #46cce3;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   position: absolute;
@@ -223,7 +222,7 @@ input[type="range"]:focus {
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
-  background: #46cce3;
+  background: #fde3cf;
   content: '';
   height: 2.5px;
   border-radius: 15px;
@@ -255,7 +254,7 @@ input[type="range"]:active::-webkit-slider-thumb{
 }
 
 .musicPlayerIcon{
-  color: #46cce3 !important;
+  color: #fde3cf !important;
   width: 28px;
   aspect-ratio: 1/1;
   cursor: pointer;
@@ -263,7 +262,7 @@ input[type="range"]:active::-webkit-slider-thumb{
 }
 
 .musicPlayerIcon:hover{
-  color: #fde3cf !important;
+  color: #46cce3 !important;
 }
 
 .musicPlayerIcon svg {
