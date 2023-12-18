@@ -26,11 +26,14 @@ body {
 }
 
 form * {
-  font-family: "Poppins", sans-serif;
-  color: #ffffff;
   letter-spacing: 0.5px;
   outline: none;
   border: none;
+}
+
+.loginForm *, .registerForm *{
+  font-family: "Poppins", sans-serif;
+  color: #ffffff;
 }
 
 .inputPassword::before{
@@ -43,7 +46,7 @@ form * {
   width: 100%;
   background-color: rgba(255, 255, 255, 0);
   font-weight: inherit;
-  color: inherit;
+  color: inherit !important;
   padding: 0 10px !important;
 }
 
@@ -57,7 +60,7 @@ form * {
 }
 
 button span {
-  color: inherit;
+  color: inherit !important;
 }
 
 .ant-space-item{
@@ -124,6 +127,146 @@ button span {
   width: 95%;
 }
 
-path{
+svg, path{
   color: inherit !important;
+}
+
+.ant-input-search .ant-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ant-input-password-icon {
+  color: white !important;
+}
+
+.ant-upload-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.themeColor {
+  color: #0f2f56 !important;
+}
+
+.themeColor2 {
+  color: #46cce3 !important;
+}
+
+.backgroundThemeColor {
+  background-color: #0f2f56 !important;
+}
+
+.ant-input-search-button {
+  background-color: #0f2f56;
+  color: white !important;
+}
+
+.track *, .trackHeader *{
+  font-family: "Poppins", sans-serif;
+}
+
+.track:hover {
+  background-color: rgba(128, 128, 128, 0.2);
+  transition: all .3s ease-in-out;
+}
+
+.underlinedWhenHovered:hover {
+  text-decoration: underline;
+}
+
+.musicPlayer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 90px;
+  width: 100%;
+  padding: 0 20px;
+  background-color: #0f2f56;
+}
+
+input[type="range"] {
+  --seek-before-width: 0;
+  --seek-before-color: #fde3cf;
+  align-items: center;
+  appearance: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 15px;
+  display: flex;
+  min-height: 25px;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+input[type="range"]::before {
+  content: '';
+  height: 2.5px;
+  width: var(--seek-before-width);
+  max-width: 99%;
+  background-color: var(--seek-before-color);
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  position: absolute;
+  left: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+input[type="range"]:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background: #46cce3;
+  content: '';
+  height: 2.5px;
+  border-radius: 15px;
+  position: relative;
+  width: 100%;  
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 17px;
+  width: 17px;
+  border-radius: 50%;
+  border: none;
+  background-color: #46cce3;
+  cursor: pointer;
+  position: relative;
+  margin-top: -7px;
+  z-index: 3; 
+}
+
+input[type="range"]:active::-webkit-slider-thumb{
+  background-color: #fde3cf;
+}
+
+.milli{
+  color: white;
+  text-align: center;
+}
+
+.musicPlayerIcon{
+  color: #46cce3 !important;
+  width: 28px;
+  aspect-ratio: 1/1;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+}
+
+.musicPlayerIcon:hover{
+  color: #fde3cf !important;
+}
+
+.musicPlayerIcon svg {
+  width: inherit !important;
+  height: inherit !important;
 }

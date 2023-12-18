@@ -65,9 +65,9 @@ function AppHeader({ title }) {
   return (
     <Header style={{ 
       backgroundColor: "#0F2F56", 
-      "width": "100%",
-      "box-sizing": "border-box",
-      "height": "max-content",
+      width: "100%",
+      boxSizing: "border-box",
+      height: "max-content",
     }}>
       <Row justify="space-between" align="middle">
         <Col>

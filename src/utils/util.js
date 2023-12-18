@@ -29,6 +29,14 @@ export const formatDateDifference = (differenceInMilliseconds) => {
   }
 };
 
+export const formatDuration = (secs) => {
+  const minutes = Math.floor(secs / 60);
+  const returnedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+  const seconds = Math.floor(secs % 60);
+  const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+  return `${returnedMinutes}:${returnedSeconds}`;
+}
+
 export const formatDateTime = (date) => {
   // convert Date to "DD/MM/YYYY HH:MM:SS" format
   const day = String(date.getDate()).padStart(2, '0');

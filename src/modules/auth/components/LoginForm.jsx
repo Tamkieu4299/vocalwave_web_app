@@ -83,7 +83,7 @@ function LoginForm({ onSubmit, isLoading }) {
         }
       }>
         <img src={logo} alt="void-ads-logo" className="w-20 h-20 m-auto" />
-        <Form name="validate_other" layout="vertical" onFinish={onSubmit}>
+        <Form name="validate_other" layout="vertical" onFinish={onSubmit} className="loginForm">
           <Form.Item
             name="username"
             label={<span style={labelStyle}>{AUTH_TEXT.name}</span>}
