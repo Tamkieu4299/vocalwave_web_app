@@ -9,7 +9,7 @@ function AppLayout({ children, title }) {
         <AppHeader title={title} />
         <div
           className="p-3 relative"
-          style={{ minHeight: `calc(100vh - 64px)` }}
+          style={{ minHeight: `calc(100vh - 64px)`, padding: "100px 0" }}
         >
           {children}
         </div>
