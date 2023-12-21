@@ -68,6 +68,8 @@ function AppHeader({ title }) {
       width: "100%",
       boxSizing: "border-box",
       height: "max-content",
+      position: "fixed",
+      "z-index": "2"
     }}>
       <Row justify="space-between" align="middle">
         <Col>
