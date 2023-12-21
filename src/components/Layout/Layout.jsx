@@ -1,6 +1,7 @@
 import { Layout } from "antd";
 import PropTypes from "prop-types";
 import AppHeader from "../Layout/Header";
+import Dialog from "../Button/Dialog";
 
 function AppLayout({ children, title }) {
   return (
@@ -13,6 +14,7 @@ function AppLayout({ children, title }) {
         >
           {children}
         </div>
+        <Dialog />
       </Layout>
     </Layout>
   );

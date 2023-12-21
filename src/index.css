@@ -269,3 +269,22 @@ input[type="range"]:active::-webkit-slider-thumb{
   width: inherit !important;
   height: inherit !important;
 }
+
+.floatButton .ant-float-btn-icon {
+  width: auto !important;
+  height: auto !important;
+}
+
+.floatButton .ant-float-btn-body {
+  background-color: transparent;
+}
+
+.floatButton{
+  background-color: #0f2f56;
+  transition: all .3s ease-in-out;
+}
+
+.floatButton:hover{
+  background-color: #46cce3 !important;
+  scale: 1.1;
+}
