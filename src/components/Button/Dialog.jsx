@@ -3,7 +3,7 @@ import ModalContainer from "@/components/Modal/containers/ModalContainer";
 import { FloatButton, Row, Col, Button, Select } from 'antd';
 import icon from "../../assets/icon.png"
 
-const Dialog = () => {
+const Dialog = ({title}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const titleStyle = {
@@ -11,7 +11,7 @@ const Dialog = () => {
     justifyContent: "center", 
     alignItems: "center",
     color: "#46cce3",
-    fontSize: "23px",
+    fontSize: "32px",
     fontWeight: "900",
   }
 
@@ -26,8 +26,8 @@ const Dialog = () => {
   const filterOption = (input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
 
   return (
-    <>
-      <ModalContainer
+    title != 'Songs' && title != 'Playlist' && <>
+       <ModalContainer
           open={isOpen}
           onCancel={() => setIsOpen(false)}
           cancelButtonProps={{ style: {display: "none"} }}
@@ -38,7 +38,7 @@ const Dialog = () => {
           <Row style={titleStyle}>
             <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between", gap: "15px"}}>
               Use our Emotion Recognition System
-              <Button>Start</Button>
+              <Button className="dashed-button">Start</Button>
             </div>
           </Row>
           <div style={{display: "flex", alignItems: "center", justifyContent: "space-between"}}>
@@ -81,7 +81,6 @@ const Dialog = () => {
       icon={<img src={icon} style={{width: "45px"}}/>} 
       onClick={() => setIsOpen(true)} />
     </>
-    
   )
 }
 

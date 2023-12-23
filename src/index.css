@@ -288,3 +288,24 @@ input[type="range"]:active::-webkit-slider-thumb{
   background-color: #46cce3 !important;
   scale: 1.1;
 }
+
+.dashed-button {
+  display: inline-block;
+  width: 320px;
+  height: 80px;
+  padding: 10px 20px;
+  border: 2px dashed #0f2f56; /* Dashed border with blue color */
+  border-radius: 15px;
+  text-align: center;
+  text-decoration: none;
+  color: #0f2f56; /* Text color */
+  font-weight: bold;
+  background-color: #0f2f5615;
+  font-size: 30px;
+}
+
+.dashed-button:hover {
+  background-color: #0f2f56;
+  border: none;
+  color: white;
+}
