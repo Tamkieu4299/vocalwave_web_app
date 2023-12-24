@@ -11,6 +11,7 @@ export const initAudioValues = {
 };
 
 export const columns = ({
+  handlePlayDetail = noop,
   handleOpenDetail = noop,
   handleOpenDelete = noop,
 }) => [
@@ -70,6 +71,7 @@ export const columns = ({
     width: 100,
     render: (_text, record) => (
       <GroupButtonAction
+        onPlay = {() => handlePlayDetail(record.audio_id)}
         onEdit={() => handleOpenDetail(record.audio_id)}
         onDelete={() => handleOpenDelete(record.audio_id)}
       />

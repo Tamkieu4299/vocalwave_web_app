@@ -31,28 +31,6 @@ function ModalDetailAudio({ form, onSubmit, isNew }) {
       >
         <Input />
       </Form.Item>
-      <Form.Item
-        name="price"
-        label={label.price}
-        rules={[
-          {
-            required: true,
-            message: required.is_required,
-          },
-        ]}
-      >
-        <InputNumber
-          addonAfter="VND"
-          min={0}
-          max={9999999999}
-          defaultValue={0}
-          formatter={(value) =>
-            `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-          }
-          parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-        />
-      </Form.Item>
-
       {isNew && (
         <Form.Item
           name="file"

@@ -21,37 +21,42 @@ import { getLocalStorage } from "../../../../utils/storage";
 import TrackTable from "../../../../components/Table/TrackTable";
 import { list } from "postcss";
 import MusicPlayer from "../../../../components/MusicPlayer/MusicPlayer";
-import moonlight from '../../../../assets/moonlight.mp3'
+import moonlight from "../../../../assets/moonlight.mp3";
 
 const testTracklistData = [
   {
-    name: 'Song 1',
-    artist: 'Artist 1',
-    playlistName: 'Playlist A',
-    duration: '03:45',
+    name: "Song 1",
+    artist: "Artist 1",
+    playlistName: "Playlist A",
+    duration: "03:45",
   },
   {
-    name: 'Song 2',
-    artist: 'Artist 2',
-    playlistName: 'Playlist B',
-    duration: '04:20',
+    name: "Song 2",
+    artist: "Artist 2",
+    playlistName: "Playlist B",
+    duration: "04:20",
   },
   {
-    name: 'Song 3',
-    artist: 'Artist 3',
-    duration: '02:55',
+    name: "Song 3",
+    artist: "Artist 3",
+    duration: "02:55",
   },
 ];
 
 function AudioPage() {
   const [form] = useForm();
   const [searchParams] = useSearchParams();
-  const { editPermission } = usePermission();
+  const { editPermission, deletePermission, viewPermission } = usePermission();
   const user = getLocalStorage("tempUser");
   const param = user.emotion_type || "";
 
   const [modalDetailId, setModalDetailId] = useState(null);
+
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
   const { isNew, isEdit } = useDetailActionType(modalDetailId);
+
+  const [currentPlaySong, setCurrentPlaySong] = useState(null);
 
   //Title modal
   const title = useMemo(() => {
@@ -61,22 +66,31 @@ function AudioPage() {
   }, [isEdit, isNew]);
 
   //handle Modal
-  const handleOpenDetail = useCallback((id = -1) => setModalDetailId(id), []);
+  const handleOpenDetail = useCallback((id = -1) => {
+    setIsOpenModal(true), setModalDetailId(id);
+  }, []);
+
+  const handlePlayDetail = useCallback((id = -1) => {
+    setModalDetailId(id)
+  }, []);
 
   const onCancel = useCallback(() => {
     setModalDetailId(null);
+    setIsOpenModal(false);
     form.resetFields();
   }, [form]);
   const { data: listAudio, isLoading, refetch } = useFetchAllAudio(param, {});
 
   useEffect(() => {
-    refetch()
-  }, [param])
-
+    refetch();
+  }, [param]);
+  
   const { isLoading: isFetchAudio } = useFetchAudio(modalDetailId, {
     enabled: Boolean(modalDetailId && modalDetailId !== -1),
     onSuccess: (rs) => {
-      form.setFieldsValue(rs);
+      setCurrentPlaySong(rs)
+      !isOpenModal && setModalDetailId(null);
+      isOpenModal && form.setFieldsValue(rs)
     },
   });
 
@@ -140,7 +154,10 @@ function AudioPage() {
         </Col>
         <Col span={12} className="text-right">
           {editPermission && (
-            <Button className="backgroundThemeColor" onClick={() => handleOpenDetail()}>
+            <Button
+              className="backgroundThemeColor"
+              onClick={() => handleOpenDetail()}
+            >
               <Typography className="text-white">
                 {TEXT.button.addNew}
               </Typography>
@@ -152,6 +169,7 @@ function AudioPage() {
       <TableAudio
         loading={isLoading}
         columns={columns({
+          handlePlayDetail,
           handleOpenDetail,
           handleOpenDelete: openModalDelete,
         })}
@@ -162,20 +180,30 @@ function AudioPage() {
       <ModalContainer
         title={title}
         loading={isFetchAudio}
-        open={!!modalDetailId}
+        open={isOpenModal}
         onOk={() => form.submit()}
         confirmLoading={isCreate || isUpdate}
         okText={TEXT.button.ok}
         onCancel={onCancel}
-        cancelButtonProps={{style: {padding: "0 15px"}}}
-        okButtonProps={{ disabled: !editPermission, className: "backgroundThemeColor", style: {padding: "0 15px"} }}
+        cancelButtonProps={{ style: { padding: "0 15px" } }}
+        okButtonProps={{
+          disabled: !editPermission,
+          className: "backgroundThemeColor",
+          style: { padding: "0 15px" },
+        }}
         cancelText={TEXT.button.cancel}
         width={600}
       >
         <ModalDetailAudio form={form} onSubmit={onSubmit} isNew={isNew} />
       </ModalContainer>
-      <TrackTable tracklist={listAudio}/>
-      <MusicPlayer name={"Hello"} artist={"test"} song={moonlight}/>
+      {/* <TrackTable tracklist={listAudio}/> */}
+      {currentPlaySong && (
+        <MusicPlayer
+          name={currentPlaySong.audio_name}
+          artist={currentPlaySong.created_by}
+          song={`http://localhost:8001/static/audio/${currentPlaySong.audio_name}.mp3`}
+        />
+      )}
     </>
   );
 }
