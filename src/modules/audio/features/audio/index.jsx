@@ -1,6 +1,6 @@
 import ModalContainer from "@/components/Modal/containers/ModalContainer";
 import { useForm } from "antd/es/form/Form";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import useDetailActionType from "../../../../hooks/useDetailActionType";
 import { TEXT } from "../../../../localization/en";
 import ModalDetailAudio from "../../components/ModalDetail";
@@ -47,8 +47,8 @@ function AudioPage() {
   const [form] = useForm();
   const [searchParams] = useSearchParams();
   const { editPermission } = usePermission();
-  const param = searchParams.get("name") || "";
   const user = getLocalStorage("tempUser");
+  const param = user.emotion_type || "";
 
   const [modalDetailId, setModalDetailId] = useState(null);
   const { isNew, isEdit } = useDetailActionType(modalDetailId);
@@ -68,6 +68,10 @@ function AudioPage() {
     form.resetFields();
   }, [form]);
   const { data: listAudio, isLoading, refetch } = useFetchAllAudio(param, {});
+
+  useEffect(() => {
+    refetch()
+  }, [param])
 
   const { isLoading: isFetchAudio } = useFetchAudio(modalDetailId, {
     enabled: Boolean(modalDetailId && modalDetailId !== -1),
