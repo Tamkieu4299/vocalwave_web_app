@@ -30,6 +30,24 @@ const MusicPlayer = ({name, artist, duration, song }) => {
   const animationRef = useRef();
   const volumeBar = useRef();
 
+  useEffect(() => {
+    const initializeProgressBar = () => {
+        const seconds = Math.floor(audioPlayer.current.duration);
+        setCurDuration(seconds);
+        progressBar.current.max = seconds;
+    };
+    audioPlayer?.current?.addEventListener('loadedmetadata', initializeProgressBar);
+
+    return () => {
+        audioPlayer?.current?.removeEventListener('loadedmetadata', initializeProgressBar);
+    };
+    
+  }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
+
+  useEffect(() => {
+    volumeBar.current.style.setProperty('--seek-before-width', "50%");
+  }, [])
+
   const togglePlayPause = () => {
     const prevValue = isPlaying;
     setIsPlaying(!prevValue);
@@ -43,15 +61,11 @@ const MusicPlayer = ({name, artist, duration, song }) => {
     }
   }
 
-  useEffect(() => {
-    const seconds = Math.floor(audioPlayer.current.duration);
-    setCurDuration(seconds);
-    progressBar.current.max = audioPlayer.current.duration;
-  }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
-
-  useEffect(() => {
-    volumeBar.current.style.setProperty('--seek-before-width', "50%");
-  }, [])
+  const whilePlaying = () => {
+    progressBar.current.value = audioPlayer?.current?.currentTime;
+    changePlayerCurrentTime();
+    animationRef.current = requestAnimationFrame(whilePlaying);
+  }
 
   const changeRange = () => {
     audioPlayer.current.currentTime = progressBar.current.value;
@@ -60,14 +74,7 @@ const MusicPlayer = ({name, artist, duration, song }) => {
 
   const changePlayerCurrentTime = () => {
     progressBar.current.style.setProperty('--seek-before-width', `${progressBar.current.value / curDuration * 100}%`)
-    animationRef.current = requestAnimationFrame(changePlayerCurrentTime);
     setCurrentTime(progressBar.current.value);
-  }
-
-  const whilePlaying = () => {
-    progressBar.current.value = audioPlayer.current.currentTime;
-    changePlayerCurrentTime();
-    animationRef.current = requestAnimationFrame(whilePlaying);
   }
 
   const volumeChange = () => {
@@ -77,7 +84,7 @@ const MusicPlayer = ({name, artist, duration, song }) => {
 
   return (
     <Footer className='musicPlayer'>
-        <audio src={song} ref={audioPlayer}></audio>
+        <audio src={song} ref={audioPlayer} preload="metadata" />
         <Row style={{
             height: "100%",
             justifyContent: "center",

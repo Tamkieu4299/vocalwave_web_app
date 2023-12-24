@@ -66,7 +66,7 @@ export const TEXT = {
     avatar: "Avatar",
   },
   audio: {
-    audio: "audio",
+    audio: "Audio",
     audio_name: "Audio Name",
     price: "Price",
     durations: "Durations",
