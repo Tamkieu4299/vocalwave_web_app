@@ -1,19 +1,22 @@
 import PropTypes from "prop-types";
 import Track from '../Track/Track';
 
-const TrackTable = ({tracklist}) => {
+const TrackTable = ({tracklist, onPlay}) => {
+  console.log(tracklist);
   return (
     <div style={{width: "100%", margin: "20px 0", flexDirection: "column", gap: "0"}}>
         <Track isHeader={true}/>
         <hr />
-        {tracklist?.map((track, index) => (
+        {tracklist?.map((track) => (
             <>
                 <Track
-                    key={index} 
+                    key={track.audio_id} 
+                    songId={track.audio_id}
                     name={track.audio_name}
                     artist={track.created_by}
                     playlistName={track?.playlistName && 'Unknown'}
                     duration={track.durations}
+                    onClick={onPlay}
                 />   
                 <hr />
             </>

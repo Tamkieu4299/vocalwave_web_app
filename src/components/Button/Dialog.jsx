@@ -128,8 +128,8 @@ const Dialog = ({ title }) => {
                     label: "Sad",
                   },
                   {
-                    value: "suprised",
-                    label: "Suprised",
+                    value: "surprised",
+                    label: "Surprised",
                   },
                   {
                     value: "disgusted",
