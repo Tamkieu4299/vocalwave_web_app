@@ -10,6 +10,10 @@ function ModalDelete({ open, content, onClose = noop, onOk = noop }) {
       onOk={onOk}
       onCancel={onClose}
       okText={TEXT.button.ok}
+      okButtonProps={{
+        className: "backgroundThemeColor",
+        style: { padding: "0 15px" },
+      }}
     >
       {content ?? TEXT.confirm.confirm_delete}
     </ModalContainer>
