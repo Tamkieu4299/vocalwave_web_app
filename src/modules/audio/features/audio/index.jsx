@@ -166,7 +166,6 @@ function AudioPage() {
         })}
         dataSource={audioList}
         rowKey="audio_id"
-        // rowSelection={rowSelection}
       />}
       <ModalContainer
         title={title}
@@ -186,7 +185,7 @@ function AudioPage() {
       >
         <ModalDetailAudio form={form} onSubmit={onSubmit} isNew={isNew} />
       </ModalContainer>
-      {(!editPermission || !deletePermission) && <TrackTable tracklist={listAudio} onPlay={handlePlayDetail}/>}
+      {(!editPermission || !deletePermission) && <TrackTable tracklist={audioList} onPlay={handlePlayDetail}/>}
       {currentPlaySong && (
         <MusicPlayer
           name={currentPlaySong.audio_name}
