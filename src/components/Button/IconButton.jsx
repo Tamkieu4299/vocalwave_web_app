@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 
 function IconButton({ title, icon, ...props }) {
   return (
-    <Tooltip title={title}>
-      <span>
-        <a {...props}>{icon}</a>
-      </span>
-    </Tooltip>
+    <span>
+        <a {...props}>
+          <Tooltip title={title} placement="bottomRight" arrow={{pointAtCenter: "true"}}>{icon}</Tooltip>
+        </a>
+    </span>
   );
 }
 

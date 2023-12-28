@@ -16,6 +16,10 @@ function AppModal({ children }) {
         content={contentModalDelete}
         onOk={onOk}
         onClose={onCancel}
+        okButtonProps={{
+          className: "backgroundThemeColor",
+          style: { padding: "0 15px" },
+        }}
       />
     </>
   );

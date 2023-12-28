@@ -103,8 +103,8 @@ export const TEXT = {
     is_required: "This field is required",
   },
   confirm: {
-    confirm_delete: "Are you sure want to delete",
-    confirm_logout: "Are you sure want to logout",
+    confirm_delete: "Are you sure want to delete?",
+    confirm_logout: "Are you sure want to logout?",
   },
   message: {
     create_success: "Create successfully",
