@@ -22,9 +22,9 @@ const subtitle = {
     width: "max-content"
 }
 
-const Track = ({name, artist, playlistName = "Unknown", duration, isHeader = false}) => {
+const Track = ({songId, name, artist, playlistName = "Unknown", duration, isHeader = false, onClick }) => {
   return (
-    <Row className={isHeader ? "trackHeader" : "track"} style={{alignItems: "center", padding: "15px 0"}}>
+    <Row className={isHeader ? "trackHeader" : "track"} style={{alignItems: "center", padding: "15px 0"}} onClick={!isHeader ? () => onClick(songId) : null}>
         {
             isHeader 
             ? 
@@ -83,6 +83,7 @@ const Track = ({name, artist, playlistName = "Unknown", duration, isHeader = fal
 }
 
 Track.propTypes = {
+    songId: PropTypes.string,
     name: PropTypes.string,
     artist: PropTypes.string,
     playlistName: PropTypes.string,
