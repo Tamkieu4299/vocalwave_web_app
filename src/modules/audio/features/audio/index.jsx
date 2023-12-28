@@ -146,6 +146,7 @@ function AudioPage() {
   const onSearch = () => {
     refetch();
   };
+  console.log(listAudio);
   return (
     <>
       <Row>
@@ -153,20 +154,18 @@ function AudioPage() {
           <SearchDriver onSearch={onSearch} />
         </Col>
         <Col span={12} className="text-right">
-          {editPermission && (
-            <Button
-              className="backgroundThemeColor"
-              onClick={() => handleOpenDetail()}
-            >
-              <Typography className="text-white">
-                {TEXT.button.addNew}
-              </Typography>
-            </Button>
-          )}
+          <Button
+            className="backgroundThemeColor"
+            onClick={() => handleOpenDetail()}
+          >
+            <Typography className="text-white">
+              {TEXT.button.addNew}
+            </Typography>
+          </Button>
         </Col>
       </Row>
 
-      <TableAudio
+      {editPermission && deletePermission && <TableAudio
         loading={isLoading}
         columns={columns({
           handlePlayDetail,
@@ -176,7 +175,7 @@ function AudioPage() {
         dataSource={listAudio}
         rowKey="audio_id"
         // rowSelection={rowSelection}
-      />
+      />}
       <ModalContainer
         title={title}
         loading={isFetchAudio}
@@ -187,7 +186,6 @@ function AudioPage() {
         onCancel={onCancel}
         cancelButtonProps={{ style: { padding: "0 15px" } }}
         okButtonProps={{
-          disabled: !editPermission,
           className: "backgroundThemeColor",
           style: { padding: "0 15px" },
         }}
@@ -196,7 +194,7 @@ function AudioPage() {
       >
         <ModalDetailAudio form={form} onSubmit={onSubmit} isNew={isNew} />
       </ModalContainer>
-      {/* <TrackTable tracklist={listAudio}/> */}
+      {(!editPermission || !deletePermission) && <TrackTable tracklist={listAudio} onPlay={handlePlayDetail}/>}
       {currentPlaySong && (
         <MusicPlayer
           name={currentPlaySong.audio_name}

@@ -1,4 +1,4 @@
-import { Button, Form, Input, InputNumber, Upload } from "antd";
+import { Button, Form, Input, Upload } from "antd";
 import PropTypes from "prop-types";
 import { initAudioValues } from "./items";
 import { TEXT } from "../../../localization/en";
