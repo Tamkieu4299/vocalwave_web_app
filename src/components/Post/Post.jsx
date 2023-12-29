@@ -4,13 +4,14 @@ import {
     Typography,
     Card
 } from "antd";
-import { formatDateDifference } from "../../../utils/util";
+import { formatDateDifference } from "../../utils/util";
 import { useState, useEffect, useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
 import { parse } from 'date-fns';
-import request from "../../../utils/request";
+import request from "../../utils/request";
+import MusicPlayer from "../MusicPlayer/MusicPlayer"
 
-const Post = ({user, date, content, uploaded_link}) => {
+const Post = ({user, date, content, music, width = 60}) => {
   const [formattedDifference, setFormattedDifference] = useState('');
   const currentDate = useMemo(() => new Date(), []); 
   const parseDate = useCallback((dateString) => parse(dateString, 'dd/MM/yyyy HH:mm:ss', new Date()), []);
@@ -38,11 +39,14 @@ const Post = ({user, date, content, uploaded_link}) => {
   return (
     <div style={{
         display: "flex",
-        justifyContent: "center"
+        justifyContent: "center",
+        zIndex: "0"
       }}>
         <Card style={{
           display: "flex",
-          width: "60%",
+          width: `${width}%`,
+          boxShadow: "0px 0px 16px -8px rgba(0, 0, 0, 0.68)",
+          height: "max-content"
         }}>
           <div style={{
             display: "flex",
@@ -102,6 +106,7 @@ const Post = ({user, date, content, uploaded_link}) => {
               </Typography.Text>
             </Row>
           </div>
+          {music && <MusicPlayer song={music} inPost={true}/>}
         </Card>
       </div>
   )
@@ -111,7 +116,8 @@ Post.propTypes = {
     user: PropTypes.string,
     date: PropTypes.string,
     content: PropTypes.string,
-    music: PropTypes.string
+    music: PropTypes.string,
+    width: PropTypes.number
 };
 
 export default Post
