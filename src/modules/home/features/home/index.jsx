@@ -1,5 +1,5 @@
 import { getLocalStorage } from "../../../../utils/storage";
-import Post from "../../components/Post";
+import Post from "../../../../components/Post/Post";
 import Share from "../../../../components/Share/Share";
 
 function HomePage() {

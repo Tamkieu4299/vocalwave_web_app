@@ -63,7 +63,7 @@ const homePage = {
   icon: <HomeOutlined />,
 };
 const driverPage = {
-  path: "/driver-management",
+  path: "/profile",
   component: lazy(() =>
     delayRoute()(import("../modules/driver/features/driverPage"))
   ),

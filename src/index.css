@@ -188,6 +188,27 @@ svg, path{
   background-color: #0f2f56;
 }
 
+
+.musicPlayerInPost {
+  border-radius: 10px;
+  margin: 15px 0 0 0;
+  height: 90px;
+  width: 100%;
+  padding: 0 20px;
+  background-color: #0f2f56;
+}
+
+.volumeBar {
+  position: absolute;
+  top: -30px;
+  width: 100px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  transform: translateX(-32px);
+  background-color: #0f2f56;
+}
+
 input[type="range"] {
   --seek-before-width: 0;
   align-items: center;
