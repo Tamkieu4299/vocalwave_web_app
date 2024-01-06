@@ -15,6 +15,7 @@
 .profileBottom {
     width: 85%;
     display: flex;
+    gap: 70px;
 }
 
 .profileRight {

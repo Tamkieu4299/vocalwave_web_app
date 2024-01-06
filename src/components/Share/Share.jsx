@@ -23,12 +23,14 @@ export default function Share() {
     const [file, setFile] = useState(null);
     const { data: listPosts, isLoading, refetch } = useFetchAllInQuery("", {});
 
-    const submitHandler = async (e) => {
+    const submitHandler = async (e) => {    
         e.preventDefault();
         const newPost = {
             user_id: user.user_id,
             content: desc.current.value,
+            created_at: new Date().toISOString()
         };
+        console.log(newPost);
         if (file) {
             const data = new FormData();
             data.append("file", file);
