@@ -11,7 +11,6 @@ const musicInfoTest = {
 function HomePage() {
   const user = getLocalStorage("tempUser");
   const { data: listPosts, isLoading, refetch } = useFetchAllInQuery("", {});
-  console.log(listPosts)
   return (
     <div style={{
       display: "flex",
