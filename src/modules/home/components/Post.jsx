@@ -8,8 +8,9 @@ import { formatDateDifference } from "../../../utils/util";
 import { useState, useEffect, useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
 import { parse } from 'date-fns';
+import request from "../../../utils/request";
 
-const Post = ({user, date, content, music}) => {
+const Post = ({user, date, content, uploaded_link}) => {
   const [formattedDifference, setFormattedDifference] = useState('');
   const currentDate = useMemo(() => new Date(), []); 
   const parseDate = useCallback((dateString) => parse(dateString, 'dd/MM/yyyy HH:mm:ss', new Date()), []);
@@ -18,6 +19,16 @@ const Post = ({user, date, content, music}) => {
     const differenceInMilliseconds = currentDate - targetDate;
     setFormattedDifference(formatDateDifference(differenceInMilliseconds));
   }, [currentDate, targetDate]);
+  const [name, setName] = useState('Anonymous');
+  useEffect(() => {
+    const fetchUser = async (id) => {
+      const res = await request.get(`user/get-user/${user}`)
+      setName(res.data.name)
+    }
+    fetchUser(user)
+  }, [user])
+  
+
 
   useEffect(() => {
     calculateDifference();
@@ -50,7 +61,7 @@ const Post = ({user, date, content, music}) => {
                   fontWeight: "bold"
                 }}
               >
-                {user?.charAt(0)?.toUpperCase()}
+                {name?.charAt(0)?.toUpperCase()}
               </Avatar>
               <div style={{
                 display: "flex",
@@ -64,7 +75,7 @@ const Post = ({user, date, content, music}) => {
                     fontWeight: "600",
                     fontFamily: "'Montserrat', sans-serif"
                   }}>
-                    {user}
+                    {name}
                   </Typography.Text>
                 </Row>
                 <Row>
@@ -87,6 +98,7 @@ const Post = ({user, date, content, music}) => {
                 fontFamily: "'Montserrat', sans-serif",
               }}>
                 {content}
+                <img src={`http://localhost:8001/static/image/${uploaded_link}.jpg`} alt="Your Image Alt Text" style={{ maxWidth: '80%', height: 'auto' }} />
               </Typography.Text>
             </Row>
           </div>

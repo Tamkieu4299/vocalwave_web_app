@@ -88,7 +88,7 @@ const playlistPage = {
 };
 
 export const publicRoutesData = [loginPage, registerPage];
-export const privateRouteData = [homePage, driverPage, audioPage, playlistPage];
+export const privateRouteData = [homePage, driverPage, audioPage];
 
 const publicRoutes = () => {
   return publicRoutesData.map((route, index) => {
