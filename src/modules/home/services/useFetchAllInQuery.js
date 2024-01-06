@@ -3,8 +3,8 @@ import request from "../../../utils/request";
 
 function useFetchAllInQuery(param = "", options) {
   return useQuery(
-    ["inQueries"],
-    () => request.get(`inquiry/search/${param}`),
+    ["news"],
+    () => request.get(`post/search/`),
     options
   );
 }

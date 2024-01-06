@@ -13,41 +13,39 @@ import {
     Card
 } from "antd";
 import { useContext, useRef, useState } from "react";
-import axios from "axios";
 import { getLocalStorage } from "../../utils/storage";
-import { FileImageFilled } from '@ant-design/icons';
-
+import request from "../../utils/request";
+import useFetchAllInQuery from "../../modules/home/services/useFetchAllInQuery";
 
 export default function Share() {
     const user = getLocalStorage("tempUser");
-    console.log(user);
-    // const PF = "";
     const desc = useRef();
     const [file, setFile] = useState(null);
+    const { data: listPosts, isLoading, refetch } = useFetchAllInQuery("", {});
 
     const submitHandler = async (e) => {
         e.preventDefault();
         const newPost = {
-            userId: user._id,
-            desc: desc.current.value,
+            user_id: user.user_id,
+            content: desc.current.value,
         };
         if (file) {
             const data = new FormData();
-            const fileName = Date.now() + file.name;
-            data.append("name", fileName);
             data.append("file", file);
-            newPost.img = fileName;
-            console.log(newPost);
+            data.append(
+                "post_data",
+                JSON.stringify(newPost)
+              );
+            console.log(data);
             try {
-                await axios.post("/upload", data);
+                await request.post("/post/create", data);
+                setFile(null)
+                desc.current.value = null
+                refetch()
             } catch (err) {
                 console.log(err);
             }
         }
-        try {
-            await axios.post("/posts", newPost);
-            window.location.reload();
-        } catch (err) {console.log("Error!");}
     };
 
     return (
