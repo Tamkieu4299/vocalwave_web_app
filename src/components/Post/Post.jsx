@@ -11,7 +11,7 @@ import { parse } from 'date-fns';
 import request from "../../utils/request";
 import MusicPlayer from "../MusicPlayer/MusicPlayer"
 
-const Post = ({user, date, content, music, width = 60}) => {
+const Post = ({user, date, content, music, uploaded_link, width = 60}) => {
   const [formattedDifference, setFormattedDifference] = useState('');
   const currentDate = useMemo(() => new Date(), []); 
   const parseDate = useCallback((dateString) => parse(dateString, 'dd/MM/yyyy HH:mm:ss', new Date()), []);
@@ -102,7 +102,7 @@ const Post = ({user, date, content, music, width = 60}) => {
                 fontFamily: "'Montserrat', sans-serif",
               }}>
                 {content}
-                <img src={`http://localhost:8001/static/image/${uploaded_link}.jpg`} alt="Your Image Alt Text" style={{ maxWidth: '80%', height: 'auto' }} />
+                {uploaded_link && <img src={`http://localhost:8001/static/image/${uploaded_link}.jpg`} alt="Your Image Alt Text" style={{ maxWidth: '80%', height: 'auto' }} />}
               </Typography.Text>
             </Row>
           </div>
