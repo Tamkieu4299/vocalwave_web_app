@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import ModalContainer from "@/components/Modal/containers/ModalContainer";
-import { FloatButton, Row, Col, Button, Select } from "antd";
+import { FloatButton, Row, Col, Button, Select, Tooltip } from "antd";
 import icon from "../../assets/icon.png";
 import request from "../../utils/request";
 import { getLocalStorage, setLocalStorage } from "../../utils/storage";
@@ -128,8 +128,8 @@ const Dialog = ({ title }) => {
                     label: "Sad",
                   },
                   {
-                    value: "suprised",
-                    label: "Suprised",
+                    value: "surprised",
+                    label: "Surprised",
                   },
                   {
                     value: "disgusted",
@@ -145,12 +145,14 @@ const Dialog = ({ title }) => {
           </Row>
         </Col>
       </ModalContainer>
-      <FloatButton
-        className="floatButton"
-        style={{ backgroundColor: "#0f2f56" }}
-        icon={<img src={icon} style={{ width: "45px" }} />}
-        onClick={() => userData?.emotion_type ? refreshEmotion() : setIsOpen(true)}
-      />
+      <Tooltip title={"Music Recommendation"} placement="left">
+        <FloatButton
+          className="floatButton"
+          style={{ backgroundColor: "#0f2f56", insetBlockEnd: "170px" }}
+          icon={<img src={icon} style={{ width: "45px" }} />}
+          onClick={() => userData?.emotion_type ? refreshEmotion() : setIsOpen(true)}
+        />
+      </Tooltip>
     </>
   );
 };

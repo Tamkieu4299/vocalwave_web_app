@@ -1,5 +1,21 @@
 .profile {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 200px;
+}
+
+.profileTop{
+    width: 85%;
+    min-height: 211px;
+    position: relative;
+}
+
+.profileBottom {
+    width: 85%;
+    display: flex;
+    gap: 70px;
 }
 
 .profileRight {
@@ -18,6 +34,7 @@
 }
 
 .profileUserImg {
+    background-color: #fde3cf;
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -26,8 +43,47 @@
     left: 0;
     right: 0;
     margin: auto;
-    top: 150px;
+    top: 170px;
     border: 3px solid white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #46cce3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profileUserImg .ant-avatar-string{
+    font-size: 72px;
+    width: max-content;
+    height: max-content;
+    font-weight: 500;
+}
+
+.profileUsername {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: max-content;
+    max-width: 350px;
+    top: 330px;
+    font-size: 30px;
+}
+
+.profileDescription{
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: max-content;
+    max-width: 350px;
+    top: 370px;
+    color: grey;
+    font-size: 16px;
 }
 
 .profileInfo {
@@ -47,4 +103,11 @@
 
 .profileRightBottom {
     display: flex;
+}
+
+.profileUserPosts {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 0;
 }

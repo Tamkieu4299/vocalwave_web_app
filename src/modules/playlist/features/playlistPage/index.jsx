@@ -151,18 +151,19 @@ function PlaylistPage() {
 
   return (
     <>
-      <Row>
+      <Row style={{padding: "15px"}}>
         <Col span={12}>
           <SearchDriver onSearch={onSearch} />
         </Col>
         <Col span={12} className="text-right">
-          {editPermission && (
-            <Button className="bg-primary " onClick={() => handleOpenDetail()}>
-              <Typography className="text-white">
-                {TEXT.button.addNew}
-              </Typography>
-            </Button>
-          )}
+          <Button
+            className="backgroundThemeColor"
+            onClick={() => handleOpenDetail()}
+          >
+            <Typography className="text-white">
+              {TEXT.button.addNew}
+            </Typography>
+          </Button>
         </Col>
       </Row>
 

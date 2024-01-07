@@ -8,25 +8,28 @@ function GroupButtonAction({ onPlay, onEdit, onDelete, canDelete = true }) {
   const { editPermission, deletePermission, viewPermission } = usePermission();
 
   return (
-    <Row className="justify-center gap-2">
+    <Row className="justify-center gap-2" style={{alignItems: "center"}}>
       <IconButton
         onClick={onPlay}
         title="Play"
-        icon={<PlayCircleOutlined />}
-        className="text-base text-green-500"
+        icon={<PlayCircleOutlined style={{display: "block"}}/>}
+        style={{height: "16px", display: "block"}}
+        className="text-base themeColor"
       />
       {editPermission && <IconButton
         onClick={onEdit}
         title="Edit"
-        icon={<EditOutlined />}
-        className="text-base text-sky-500"
+        icon={<EditOutlined style={{display: "block"}}/>}
+        style={{height: "16px", display: "block"}}
+        className="text-base themeColor"
       />}
       {deletePermission && canDelete && (
         <IconButton
           onClick={onDelete}
           title="Delete"
-          icon={<DeleteOutlined />}
-          className="text-base text-red-500"
+          icon={<DeleteOutlined style={{display: "block"}}/>}
+          style={{height: "16px", display: "block"}}
+          className="text-base themeColor"
         />
       )}
     </Row>

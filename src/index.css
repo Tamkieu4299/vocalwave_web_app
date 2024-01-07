@@ -188,6 +188,41 @@ svg, path{
   background-color: #0f2f56;
 }
 
+
+.musicPlayerInPost {
+  border-radius: 10px;
+  height: 90px;
+  width: 100%;
+  padding: 0 20px;
+  background-color: #0f2f56;
+}
+
+.musicPlayerInPostBtn {
+  background-color: #fde3cf;
+  color: #46cce3;
+  padding: 15px 15px 10px 15px;
+  border-radius: 15px;
+  line-height: 15px;
+  font-family: "Martel Sans", sans-serif;
+  font-weight: 700;
+  transition: all .3s ease-out;
+}
+
+.musicPlayerInPostBtn:hover {
+  transform: translateY(-5px);
+}
+
+.volumeBar {
+  position: absolute;
+  top: -30px;
+  width: 100px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  transform: translateX(-32px);
+  background-color: #0f2f56;
+}
+
 input[type="range"] {
   --seek-before-width: 0;
   align-items: center;
@@ -308,4 +343,8 @@ input[type="range"]:active::-webkit-slider-thumb{
   background-color: #0f2f56;
   border: none;
   color: white;
+}
+
+.ant-card-body{
+  width: 100%;
 }

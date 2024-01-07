@@ -19,32 +19,12 @@ import useUpdateAudio from "../../services/useUpdateAudio";
 import usePermission from "../../../../hooks/usePermission";
 import { getLocalStorage } from "../../../../utils/storage";
 import TrackTable from "../../../../components/Table/TrackTable";
-import { list } from "postcss";
 import MusicPlayer from "../../../../components/MusicPlayer/MusicPlayer";
-import moonlight from "../../../../assets/moonlight.mp3";
-
-const testTracklistData = [
-  {
-    name: "Song 1",
-    artist: "Artist 1",
-    playlistName: "Playlist A",
-    duration: "03:45",
-  },
-  {
-    name: "Song 2",
-    artist: "Artist 2",
-    playlistName: "Playlist B",
-    duration: "04:20",
-  },
-  {
-    name: "Song 3",
-    artist: "Artist 3",
-    duration: "02:55",
-  },
-];
+import { formatDuration } from "../../../../utils/util";
 
 function AudioPage() {
   const [form] = useForm();
+  const [audioList, setAudioList] = useState([]);
   const [searchParams] = useSearchParams();
   const { editPermission, deletePermission, viewPermission } = usePermission();
   const user = getLocalStorage("tempUser");
@@ -79,7 +59,19 @@ function AudioPage() {
     setIsOpenModal(false);
     form.resetFields();
   }, [form]);
+  
   const { data: listAudio, isLoading, refetch } = useFetchAllAudio(param, {});
+
+  useEffect(() => {
+    if (listAudio && listAudio.length > 0) {
+      const formattedList = listAudio.map(item => ({
+        ...item,
+        durations: formatDuration(item.durations),
+      }));
+
+      setAudioList(formattedList);
+    }
+  }, [listAudio])
 
   useEffect(() => {
     refetch();
@@ -146,37 +138,35 @@ function AudioPage() {
   const onSearch = () => {
     refetch();
   };
+  console.log(listAudio);
   return (
     <>
-      <Row>
+      <Row style={{padding: "15px"}}>
         <Col span={12}>
           <SearchDriver onSearch={onSearch} />
         </Col>
         <Col span={12} className="text-right">
-          {editPermission && (
-            <Button
-              className="backgroundThemeColor"
-              onClick={() => handleOpenDetail()}
-            >
-              <Typography className="text-white">
-                {TEXT.button.addNew}
-              </Typography>
-            </Button>
-          )}
+          <Button
+            className="backgroundThemeColor"
+            onClick={() => handleOpenDetail()}
+          >
+            <Typography className="text-white">
+              {TEXT.button.addNew}
+            </Typography>
+          </Button>
         </Col>
       </Row>
 
-      <TableAudio
+      {editPermission && deletePermission && <TableAudio
         loading={isLoading}
         columns={columns({
           handlePlayDetail,
           handleOpenDetail,
           handleOpenDelete: openModalDelete,
         })}
-        dataSource={listAudio}
+        dataSource={audioList}
         rowKey="audio_id"
-        // rowSelection={rowSelection}
-      />
+      />}
       <ModalContainer
         title={title}
         loading={isFetchAudio}
@@ -187,7 +177,6 @@ function AudioPage() {
         onCancel={onCancel}
         cancelButtonProps={{ style: { padding: "0 15px" } }}
         okButtonProps={{
-          disabled: !editPermission,
           className: "backgroundThemeColor",
           style: { padding: "0 15px" },
         }}
@@ -196,7 +185,7 @@ function AudioPage() {
       >
         <ModalDetailAudio form={form} onSubmit={onSubmit} isNew={isNew} />
       </ModalContainer>
-      {/* <TrackTable tracklist={listAudio}/> */}
+      {(!editPermission || !deletePermission) && <TrackTable tracklist={audioList} onPlay={handlePlayDetail}/>}
       {currentPlaySong && (
         <MusicPlayer
           name={currentPlaySong.audio_name}

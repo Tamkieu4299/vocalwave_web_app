@@ -23,12 +23,15 @@ export default function Share() {
     const [file, setFile] = useState(null);
     const { data: listPosts, isLoading, refetch } = useFetchAllInQuery("", {});
 
-    const submitHandler = async (e) => {
+    const submitHandler = async (e) => {    
         e.preventDefault();
         const newPost = {
             user_id: user.user_id,
             content: desc.current.value,
+<<<<<<< HEAD
+            created_at: new Date().toISOString()
         };
+        console.log(newPost);
         if (file) {
             const data = new FormData();
             data.append("file", file);
@@ -45,6 +48,23 @@ export default function Share() {
             } catch (err) {
                 console.log(err);
             }
+=======
+            // created_at: new Date().toISOString()
+        };
+        const data = new FormData();
+        data.append(
+            "post_data",
+            JSON.stringify(newPost)
+          );
+        if (file) data.append("file", file);
+        try {
+            await request.post("/post/create", data);
+            setFile(null)
+            desc.current.value = null
+            refetch()
+        } catch (err) {
+            console.log(err);
+>>>>>>> 8bf17dc51e3f29d6518b85a3136c7303b20ea4e9
         }
     };
 
