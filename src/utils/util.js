@@ -30,6 +30,7 @@ export const formatDateDifference = (differenceInMilliseconds) => {
 };
 
 export const formatDuration = (secs) => {
+  if (secs == 0) return "00:00";
   const minutes = Math.floor(secs / 60);
   const returnedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
   const seconds = Math.floor(secs % 60);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { Layout, Col, Row } from "antd";
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
@@ -11,14 +11,17 @@ const title = {
     fontWeight: "600",
     fontSize: "16px",
     width: "max-content",
-    lineHeight: "18px"
+    lineHeight: "18px",
+    cursor: "pointer", 
+    color: "white"
 }
 
 const subtitle = {
     fontWeight: "normal",
     fontSize: "13px",
     width: "max-content",
-    lineHeight: "16px"
+    lineHeight: "16px",
+    color: "white"
 }
 
 const MusicPlayer = ( { name, artist, duration, song, inPost = false } ) => {
@@ -32,7 +35,7 @@ const MusicPlayer = ( { name, artist, duration, song, inPost = false } ) => {
 
   useEffect(() => {
     const initializeProgressBar = () => {
-        const seconds = Math.floor(audioPlayer.current.duration);
+        const seconds = Math.floor(audioPlayer?.current.duration);
         setCurDuration(seconds);
         progressBar.current.max = seconds;
     };
@@ -42,7 +45,7 @@ const MusicPlayer = ( { name, artist, duration, song, inPost = false } ) => {
         audioPlayer?.current?.removeEventListener('loadedmetadata', initializeProgressBar);
     };
     
-  }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
+  }, [audioPlayer, audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 
   useEffect(() => {
     volumeBar.current.style.setProperty('--seek-before-width', "50%");
@@ -112,8 +115,8 @@ const MusicPlayer = ( { name, artist, duration, song, inPost = false } ) => {
                                 </Col>
                             </div>
                             <div style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
-                                <div style={{...title, cursor: "pointer", color: "white"}} className="underlinedWhenHovered">{name}</div>
-                                <div style={{...subtitle, color: "white"}}>{artist}</div>
+                                <div style={title} className="underlinedWhenHovered">{name}</div>
+                                <div style={subtitle}>{artist}</div>
                             </div> 
                         </Row>
                     </Col>
@@ -154,7 +157,7 @@ const MusicPlayer = ( { name, artist, duration, song, inPost = false } ) => {
                     justifyContent: "center",
                     alignItems: "center"
                 }}>
-                    <Col span={7}>
+                    <Col span={8}>
                         <Row style={{gap: "10px"}}>
                             <div
                                 style={{
@@ -173,8 +176,8 @@ const MusicPlayer = ( { name, artist, duration, song, inPost = false } ) => {
                                 </Col>
                             </div>
                             <div style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
-                                <div style={{...title, cursor: "pointer", color: "white"}} className="underlinedWhenHovered">{name}</div>
-                                <div style={{...subtitle, color: "white"}}>{artist}</div>
+                                <div style={title} className="underlinedWhenHovered">{name}</div>
+                                <div style={subtitle}>{artist}</div>
                             </div> 
                         </Row>
                     </Col>
@@ -192,11 +195,11 @@ const MusicPlayer = ( { name, artist, duration, song, inPost = false } ) => {
                                 <input type='range' defaultValue="0" ref={progressBar} onChange={changeRange}/>
                             </Col>
                             <Col className="progress-time-total milli" span={2}>
-                                {(curDuration && !isNaN(curDuration)) && formatDuration(curDuration)}
+                                {!isNaN(curDuration) && formatDuration(curDuration)}
                             </Col>
                         </Row>
                     </Col>
-                    <Col span={1}>
+                    <Col span={1} style={{display: "none"}}>
                         <Row style={{alignItems: "center", gap: "10px", justifyContent: "flex-end", position: "relative"}}>
                             <div className="volumeBar" style={{height: "21px", padding: "5px", display: "flex", alignItems: "center"}}>
                                 <input type='range' min="0" max="1" step="0.1" defaultValue="0.5" ref={volumeBar} onChange={volumeChange}/>
