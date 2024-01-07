@@ -28,27 +28,6 @@ export default function Share() {
         const newPost = {
             user_id: user.user_id,
             content: desc.current.value,
-<<<<<<< HEAD
-            created_at: new Date().toISOString()
-        };
-        console.log(newPost);
-        if (file) {
-            const data = new FormData();
-            data.append("file", file);
-            data.append(
-                "post_data",
-                JSON.stringify(newPost)
-              );
-            console.log(data);
-            try {
-                await request.post("/post/create", data);
-                setFile(null)
-                desc.current.value = null
-                refetch()
-            } catch (err) {
-                console.log(err);
-            }
-=======
             // created_at: new Date().toISOString()
         };
         const data = new FormData();
@@ -64,7 +43,6 @@ export default function Share() {
             refetch()
         } catch (err) {
             console.log(err);
->>>>>>> 8bf17dc51e3f29d6518b85a3136c7303b20ea4e9
         }
     };
 
