@@ -31,6 +31,18 @@ function ModalDetailAudio({ form, onSubmit, isNew }) {
       >
         <Input />
       </Form.Item>
+      <Form.Item
+        name="emotion_type"
+        label={label.emotion_type}
+        rules={[
+          {
+            required: true,
+            message: required.is_required,
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
       {isNew && (
         <Form.Item
           name="file"

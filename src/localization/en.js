@@ -68,6 +68,7 @@ export const TEXT = {
   audio: {
     audio: "Audio",
     audio_name: "Audio Name",
+    emotion_type: "Emotion Type",
     price: "Price",
     durations: "Durations",
     link: "Link",
