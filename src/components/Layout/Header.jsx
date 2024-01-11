@@ -23,8 +23,8 @@ const { Title } = Typography;
 
 const Nav = styled.nav`
   display: flex;
-  width: 40%;
-  min-width: 550px;
+  width: 35%;
+  min-width: 400px;
   -webkit-box-pack: justify;
   justify-content: space-between;
   -webkit-box-align: center;
@@ -74,7 +74,9 @@ function AppHeader({ title }) {
       <Row justify="space-between" align="middle">
         <Col>
           <Title className="text-left pt-2 m-0" style={{ color: "#fff" }}>
-            VocalWave
+              <NavLink to={"/"} style={{color: "white"}}>
+                  VocalWave
+              </NavLink>
           </Title>
         </Col>
         <Col>
