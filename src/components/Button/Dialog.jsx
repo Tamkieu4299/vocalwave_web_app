@@ -46,10 +46,6 @@ const Dialog = ({ title }) => {
     navigate("/audio-management");
   };
 
-  const onSearch = (value) => {
-    console.log("search:", value);
-  };
-
   const filterOption = (input, option) =>
     (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
@@ -112,7 +108,6 @@ const Dialog = ({ title }) => {
                 placeholder="Select your emotion"
                 optionFilterProp="children"
                 onChange={onChange}
-                onSearch={onSearch}
                 filterOption={filterOption}
                 options={[
                   {
@@ -138,6 +133,10 @@ const Dialog = ({ title }) => {
                   {
                     value: "neutral",
                     label: "Neutral",
+                  },
+                  {
+                    value: "nervous",
+                    label: "Nervous",
                   },
                 ]}
               />
