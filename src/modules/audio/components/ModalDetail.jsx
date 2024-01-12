@@ -1,12 +1,15 @@
-import { Button, Form, Input, Upload } from "antd";
+import { Button, Form, Input, Upload, Select } from "antd";
 import PropTypes from "prop-types";
 import { initAudioValues } from "./items";
 import { TEXT } from "../../../localization/en";
 import { checkFile } from "../../../utils/util";
 import { UploadOutlined } from "@ant-design/icons";
+
 function ModalDetailAudio({ form, onSubmit, isNew }) {
   const label = TEXT.audio;
   const required = TEXT.required;
+
+  const filterOption = (input, option) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase()); 
   return (
     <Form
       form={form}
@@ -41,7 +44,42 @@ function ModalDetailAudio({ form, onSubmit, isNew }) {
           },
         ]}
       >
-        <Input />
+        <Select
+        showSearch
+        placeholder="Select your emotion"
+        optionFilterProp="children"
+        filterOption={filterOption}
+        options={[
+          {
+            value: "happy",
+            label: "Happy",
+          },
+          {
+            value: "angry",
+            label: "Angry",
+          },
+          {
+            value: "sad",
+            label: "Sad",
+          },
+          {
+            value: "surprised",
+            label: "Surprised",
+          },
+          {
+            value: "disgusted",
+            label: "Disgusted",
+          },
+          {
+            value: "neutral",
+            label: "Neutral",
+          },
+          {
+            value: "nervous",
+            label: "Nervous",
+          },
+        ]}
+      />
       </Form.Item>
       {isNew && (
         <Form.Item

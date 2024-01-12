@@ -116,6 +116,7 @@ function AudioPage() {
 
   const onSubmit = async () => {
     const value = form.getFieldValue();
+    console.log(value);
     const userName = user?.name;
 
     if (isNew) {
