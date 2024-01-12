@@ -61,7 +61,7 @@ function ModalDetailAudio({ form, onSubmit, isNew }) {
             }}
             multiple={true}
             showUploadList={true}
-            beforeUpload={checkFile}
+            beforeUpload={(file) => checkFile(file) || Upload.LIST_IGNORE}
             onChange={form.onChange}
             maxCount={1}
           >
