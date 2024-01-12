@@ -55,6 +55,14 @@ export const TEXT = {
   driver: {
     driver: "Profile",
     name: "Name",
+    user: "Username",
+    email: "Email",
+    city: "City",
+    from: "From",
+    password: "Password",
+    confirmPassword: "Confirm Password",
+    profile: "Profile Picture",
+    cover: "Cover Picture",
     phone: "Phone",
     gender: "Gender",
     DOB: "Birth day",
@@ -64,6 +72,7 @@ export const TEXT = {
     car: "car",
     playlist: "Playlist",
     avatar: "Avatar",
+    bio: "Bio"
   },
   audio: {
     audio: "Audio",

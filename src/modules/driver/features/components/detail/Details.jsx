@@ -1,13 +1,19 @@
 import "./details.css";
+import ModalContainer from "@/components/Modal/containers/ModalContainer";
+import ModalInfoDetail from "../../../components/ModalInfoDetail";
+import ModalBioDetail from "../../../components/ModalBioDetail";
+import { useForm } from "antd/es/form/Form";
 import { useEffect, useState, useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";;
 import { Add, Remove } from "@material-ui/icons";
 import { useNavigate } from "react-router-dom";
-import { Avatar } from "antd";
+import { Avatar, Modal } from "antd";
 import { getLocalStorage } from "../../../../../utils/storage";
 
 export default function Details({ user }) {
+    const [form] = useForm();
+    const [form2] = useForm();
     const username = useRef();
     const email = useRef();
     const city = useRef();
@@ -22,9 +28,17 @@ export default function Details({ user }) {
     const editClose = useRef();
     const PF = "";
     const [friends, setFriends] = useState([]);
+    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen2, setIsOpen2] = useState(false);
     const currentUser = getLocalStorage('tempUser');
     const navigate = useNavigate();
 
+    const onSubmit = () => {
+        const value = form.getFieldValue();
+        console.log(value);
+        const value2 = form2.getFieldValue();
+        console.log(value2);
+    }
 
     useEffect(() => {
         const getFriends = async () => {
@@ -57,20 +71,8 @@ export default function Details({ user }) {
         navigate("/messenger");
     };
 
-    const handleClickEdit = (e) => {
-        editBtn.current.onclick = function () {
-            editModal.current.style.display = "block";
-        };
-
-        editClose.current.onclick = function () {
-            editModal.current.style.display = "none";
-        };
-
-        window.onclick = function (event) {
-            if (event.target === editModal.current) {
-                editModal.current.style.display = "none";
-            }
-        };
+    const handleClickEdit = () => {
+        setIsOpen2(true)
     };
 
     const handleSubmitEdit = async (e) => {
@@ -168,7 +170,7 @@ export default function Details({ user }) {
                 </div>
                 <button
                     className="detailButton"
-                    onClick={handleClickEdit}
+                    onClick={() => setIsOpen(true)}
                     ref={editBioBtn}
                 >
                     Edit Bio
@@ -195,7 +197,7 @@ export default function Details({ user }) {
                 </div>
                 <button
                     className="detailButton"
-                    onClick={handleClickEdit}
+                    onClick={() => setIsOpen2(true)}
                     ref={editBtn}
                 >
                     Edit profile
@@ -239,102 +241,36 @@ export default function Details({ user }) {
                     </div>
                 </div>
                 {user.username === currentUser.username && (
-                    <div class="rightbarEditContainer">
-                        <div id="myModal" class="modal" ref={editModal} style={{zIndex: "9"}}>
-                            <div class="modal-content" style={{zIndex: "9"}}>
-                                <h2>Profile</h2>
-                                <form onSubmit={handleSubmitEdit}>
-                                    <label for="username">User name:</label>
-                                    <br />
-                                    <input
-                                        type="text"
-                                        name="username"
-                                        placeholder={user.username}
-                                        ref={username}
-                                    />
-                                    <br />
-                                    <label for="email">Email:</label>
-                                    <br />
-                                    <input
-                                        type="text"
-                                        id="email"
-                                        name="email"
-                                        placeholder={user.email}
-                                        ref={email}
-                                    />
-                                    <br />
-                                    <label for="city">City:</label>
-                                    <br />
-                                    <input
-                                        type="text"
-                                        id="city"
-                                        name="city"
-                                        placeholder={user.city}
-                                        ref={city}
-                                    />
-                                    <br />
-                                    <label for="from">From:</label>
-                                    <br />
-                                    <input
-                                        type="text"
-                                        id="from"
-                                        name="from"
-                                        placeholder={user.from}
-                                        ref={from}
-                                    />
-                                    <br />
-                                    <label for="password">Password:</label>
-                                    <br />
-                                    <input
-                                        type="text"
-                                        id="password"
-                                        name="password"
-                                        ref={password}
-                                    />
-                                    <br />
-                                    <label for="passwordAgain">
-                                        Password again:
-                                    </label>
-                                    <br />
-                                    <input
-                                        type="text"
-                                        id="passwordAgain"
-                                        name="passwordAgain"
-                                        ref={passwordAgain}
-                                    />
-                                    <br />
-                                    <label for="profilePic">
-                                        Profile picture:
-                                    </label>
-                                    <br />
-                                    <input
-                                        type="file"
-                                        id="profilePic"
-                                        name="profilePic"
-                                        accept=".png,.jpeg,.jpg"
-                                        ref={profilePic}
-                                    />
-                                    <br />
-                                    <label for="coverPic">
-                                        Cover picture:
-                                    </label>
-                                    <br />
-                                    <input
-                                        type="file"
-                                        id="coverPic"
-                                        name="coverPic"
-                                        accept=".png,.jpeg,.jpg"
-                                        ref={coverPic}
-                                    />
-                                    <br />
-                                    <input type="submit" value="Submit" />
-                                </form>
-                                <button ref={editClose} className="close">
-                                    x
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    <ModalContainer 
+                        title={"Edit Bio"}
+                        open={isOpen}
+                        onCancel={() => setIsOpen(false)}
+                        onOk={() => form.submit()}
+                        cancelButtonProps={{ style: { padding: "0 15px" } }}
+                        okButtonProps={{
+                            className: "backgroundThemeColor",
+                            style: { padding: "0 15px" },
+                        }}
+                        okText={"Confirm"}
+                    >
+                        <ModalBioDetail form={form} onSubmit={onSubmit} />
+                    </ModalContainer>
+                )}
+                {user.username === currentUser.username && (
+                    <ModalContainer 
+                        title={"Edit Profile"}
+                        open={isOpen2}
+                        onCancel={() => setIsOpen2(false)}
+                        onOk={() => form.submit()}
+                        cancelButtonProps={{ style: { padding: "0 15px" } }}
+                        okButtonProps={{
+                            className: "backgroundThemeColor",
+                            style: { padding: "0 15px" },
+                        }}
+                        okText={"Confirm"}
+                    >
+                        <ModalInfoDetail form={form2} onSubmit={onSubmit} />
+                    </ModalContainer>
                 )}
                 <div className="rightbarFollowings">
                     {friends.map((friend, index) => (

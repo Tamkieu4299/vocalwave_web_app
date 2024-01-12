@@ -69,6 +69,9 @@ export const trimParams = (params) =>
 export const fileMusicPattern =
   /^(audio\/mp3|audio\/mpeg|video\/mp4|audio\/x-ms-wma|audio\/wav|audio\/flac|audio\/aac|audio\/ogg|audio\/aiff|audio\/alac)$/;
 
+export const fileImagePattern =
+  /^(image\/jpeg|image\/png|image\/gif|image\/bmp|image\/tiff|image\/webp)$/;
+
 export const checkFile = (file) => {
   const { type } = file;
 
@@ -78,6 +81,17 @@ export const checkFile = (file) => {
     message.error("Upload wrong file");
   }
   return isMusicFile;
+};
+
+export const checkImageFile = (file) => {
+  const { type } = file;
+
+  const isImageFile = fileImagePattern.test(type);
+
+  if (!isImageFile) {
+    message.error("Upload wrong file");
+  }
+  return isImageFile;
 };
 
 export const user = getLocalStorage("tempUser");
