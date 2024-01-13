@@ -14,6 +14,7 @@ export const columns = ({
   handlePlayDetail = noop,
   handleOpenDetail = noop,
   handleOpenDelete = noop,
+  handleOpenShare= noop,
 }) => [
   {
     title: "Index",
@@ -74,6 +75,7 @@ export const columns = ({
         onPlay = {() => handlePlayDetail(record.audio_id)}
         onEdit={() => handleOpenDetail(record.audio_id)}
         onDelete={() => handleOpenDelete(record.audio_id)}
+        onShare={() => handleOpenShare(record.audio_id)}
       />
     ),
   },

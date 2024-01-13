@@ -1,14 +1,14 @@
 import { Row } from "antd";
-import { EditOutlined, DeleteOutlined, PlayCircleOutlined  } from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined, PlayCircleOutlined, ShareAltOutlined  } from "@ant-design/icons";
 import IconButton from "./IconButton";
 import PropTypes from "prop-types";
 import usePermission from "../../hooks/usePermission";
 
-function GroupButtonAction({ onPlay, onEdit, onDelete, canDelete = true }) {
+function GroupButtonAction({ onPlay, onEdit, onDelete, canDelete = true, onShare }) {
   const { editPermission, deletePermission, viewPermission } = usePermission();
 
   return (
-    <Row className="justify-center gap-2" style={{alignItems: "center"}}>
+    <Row className="gap-2" style={{alignItems: "center"}}>
       <IconButton
         onClick={onPlay}
         title="Play"
@@ -23,6 +23,13 @@ function GroupButtonAction({ onPlay, onEdit, onDelete, canDelete = true }) {
         style={{height: "16px", display: "block"}}
         className="text-base themeColor"
       />}
+      <IconButton
+          onClick={onShare}
+          title="Share"
+          icon={<ShareAltOutlined style={{display: "block"}}/>}
+          style={{height: "16px", display: "block"}}
+          className="text-base themeColor"
+        />
       {deletePermission && canDelete && (
         <IconButton
           onClick={onDelete}

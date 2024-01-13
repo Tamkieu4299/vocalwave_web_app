@@ -12,6 +12,7 @@ import React, { useState, useEffect, useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
 import { parse } from 'date-fns';
 import request from "../../utils/request";
+import { useNavigate } from "react-router";
 
 const title = {
   fontWeight: "600",
@@ -34,11 +35,12 @@ const Post = ({user, date, content, music, uploaded_link, width = 60}) => {
 const [formattedDifference, setFormattedDifference] = useState('');
 const currentDate = useMemo(() => new Date(), []); 
 const targetDate = useMemo(() => new Date(date), []); 
-
+const [song, setSong] = useState(null)
 const calculateDifference = useCallback(() => {
   const differenceInMilliseconds = currentDate - targetDate;
   setFormattedDifference(formatDateDifference(differenceInMilliseconds));
 }, [currentDate, targetDate]);
+const navigate = useNavigate();
 
 const [name, setName] = useState('Anonymous');
 useEffect(() => {
@@ -49,12 +51,21 @@ useEffect(() => {
   fetchUser(user)
 }, [user])
 
-
+useEffect(() => {
+  const fetchAudio= async () => {
+    const res = await request.get(`audio/get/${music}`)
+    setSong(res)
+  }
+  music && fetchAudio()
+}, [music])
 
 useEffect(() => {
   calculateDifference();
 }, [calculateDifference]);
 
+const handleClickListen = (id) => {
+  navigate(`/audio-management?audio_id=${id}`)
+}
 
 return (
   <div style={{
@@ -129,7 +140,7 @@ return (
               {uploaded_link && uploaded_link.includes(".jpg") && <img src={`http://localhost:8001/static/image/${uploaded_link}`} alt="Your Image Alt Text" style={{ maxWidth: '80%', height: 'auto' }} />}
             </Row> 
           }
-          {music && <div className="musicPlayerInPost">
+          {song && <div className="musicPlayerInPost">
                 <Row style={{
                     height: "100%",
                     justifyContent: "center",
@@ -154,8 +165,8 @@ return (
                                 </Col>
                             </div>
                             <div style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
-                                <div style={title} className="underlinedWhenHovered">{music.name}</div>
-                                <div style={subtitle}>{music.artist}</div>
+                                <div style={title} className="underlinedWhenHovered">{song.audio_name}</div>
+                                <div style={subtitle}>{song.created_by}</div>
                             </div> 
                         </Row>
                     </Col>
@@ -163,7 +174,7 @@ return (
                       display: "flex",
                       justifyContent: "flex-end",
                     }}>
-                      <button className="musicPlayerInPostBtn">Click here to Listen!</button>
+                      <button onClick={() => handleClickListen(music)} className="musicPlayerInPostBtn">Click here to Listen!</button>
                     </Col>
                 </Row>
           </div>}

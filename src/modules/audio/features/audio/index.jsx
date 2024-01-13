@@ -7,7 +7,7 @@ import ModalDetailAudio from "../../components/ModalDetail";
 import TableAudio from "../../components/TableAudio";
 import { columns } from "../../components/items";
 import useCreateAudio from "../../services/useCreateAudio";
-import { displaySuccessMessage } from "../../../../utils/request";
+import request, { displaySuccessMessage } from "../../../../utils/request";
 import useFetchAllAudio from "../../services/useFetchAllAudio";
 import useFetchAudio from "../../services/useFetchAudio";
 import useDeleteAudio from "../../services/useDeleteAudio";
@@ -21,22 +21,32 @@ import { getLocalStorage } from "../../../../utils/storage";
 import TrackTable from "../../../../components/Table/TrackTable";
 import MusicPlayer from "../../../../components/MusicPlayer/MusicPlayer";
 import { formatDuration } from "../../../../utils/util";
+import ShareAudio from "../../components/ShareAudio";
 
 function AudioPage() {
   const [form] = useForm();
   const [audioList, setAudioList] = useState([]);
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { editPermission, deletePermission, viewPermission } = usePermission();
   const user = getLocalStorage("tempUser");
   const param = user.emotion_type || "";
+  const [shareSong, setShareSong] = useState(null);
 
   const [modalDetailId, setModalDetailId] = useState(null);
 
   const [isOpenModal, setIsOpenModal] = useState(false);
 
+  const [isOpenShare, setIsOpenShare] = useState(false);
+
+
   const { isNew, isEdit } = useDetailActionType(modalDetailId);
 
   const [currentPlaySong, setCurrentPlaySong] = useState(null);
+
+  useEffect(() => {
+    searchParams.get('audio_id') && handlePlayDetail(searchParams.get('audio_id'))
+    setSearchParams("")
+  }, [searchParams])
 
   //Title modal
   const title = useMemo(() => {
@@ -50,6 +60,12 @@ function AudioPage() {
     setIsOpenModal(true), setModalDetailId(id);
   }, []);
 
+  const handleOpenShare = useCallback(async (id = -1) => {
+    setIsOpenShare(true);
+    const selected = await request.get(`audio/get/${id}`)
+    setShareSong(selected)
+  }, []);
+
   const handlePlayDetail = useCallback((id = -1) => {
     setModalDetailId(id)
   }, []);
@@ -60,6 +76,11 @@ function AudioPage() {
     form.resetFields();
   }, [form]);
   
+  const onCancelShare = () => {
+    setModalDetailId(null);
+    setIsOpenShare(false);
+  };
+
   const { data: listAudio, isLoading, refetch } = useFetchAllAudio(param, {});
 
   useEffect(() => {
@@ -166,6 +187,7 @@ function AudioPage() {
           handlePlayDetail,
           handleOpenDetail,
           handleOpenDelete: openModalDelete,
+          handleOpenShare
         })}
         dataSource={audioList}
         rowKey="audio_id"
@@ -187,6 +209,16 @@ function AudioPage() {
         width={600}
       >
         <ModalDetailAudio form={form} onSubmit={onSubmit} isNew={isNew} />
+      </ModalContainer>
+      <ModalContainer
+        title="Share"
+        open={isOpenShare}
+        onOk={onCancelShare}
+        okText="Later"
+        onCancel={onCancelShare}
+        width={1000}
+      >
+        {isOpenShare && shareSong && <ShareAudio currentPlaySong={shareSong}/>}
       </ModalContainer>
       {(!editPermission || !deletePermission) && <TrackTable tracklist={audioList} onPlay={handlePlayDetail}/>}
       {currentPlaySong && (

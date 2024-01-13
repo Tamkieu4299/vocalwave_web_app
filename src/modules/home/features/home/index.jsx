@@ -19,7 +19,7 @@ function HomePage() {
     }}>
       <Share user={user?.name}/>
       {listPosts?.map((data, index) => {
-        return <Post key={data.post_id} user={data.user_id} date={data.created_at} content={data.content} uploaded_link = {data.uploaded_link} music={musicInfoTest}/>
+        return <Post key={data.post_id} user={data.user_id} date={data.created_at} content={data.content} uploaded_link = {data.uploaded_link} music={data?.audio_id ?? null}/>
       })}
     </div>
   );
