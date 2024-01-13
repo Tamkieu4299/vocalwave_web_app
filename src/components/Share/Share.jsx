@@ -91,7 +91,7 @@ export default function Share() {
                                 style={{color: "#0f2f56", marginRight: "3px"}}
                             />
                             <span className="shareOptionText">
-                                Media
+                                Image
                             </span>
                             <input
                                 style={{ display: "none" }}
