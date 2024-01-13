@@ -119,7 +119,7 @@ export default function Share() {
                         </div>
                     </div>
                     <button className="shareButton" type="submit" style={{backgroundColor: "#0f2f56", padding: "10px 15px"}}>
-                        Share
+                        Post
                     </button>
                 </form>
             </div>

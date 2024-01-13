@@ -348,3 +348,11 @@ input[type="range"]:active::-webkit-slider-thumb{
 .ant-card-body{
   width: 100%;
 }
+
+.shareBottomInPost {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 30px;
+}

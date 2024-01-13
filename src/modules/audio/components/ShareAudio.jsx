@@ -10,14 +10,33 @@ import {
     Avatar,
     Row,
     Typography,
-    Card
+    Card,
+    Col
 } from "antd";
 import { useContext, useRef, useState } from "react";
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import { getLocalStorage } from "../../../utils/storage";
 import request from "../../../utils/request";
 import useFetchAllInQuery from "../../../modules/home/services/useFetchAllInQuery";
-import MusicPlayer from "../../../components/MusicPlayer/MusicPlayer";
 import { useNavigate } from "react-router";
+
+const title = {
+    fontWeight: "600",
+    fontSize: "16px",
+    width: "max-content",
+    lineHeight: "18px",
+    cursor: "pointer", 
+    color: "white"
+}
+  
+const subtitle = {
+    fontWeight: "normal",
+    fontSize: "13px",
+    width: "max-content",
+    lineHeight: "16px",
+    color: "white"
+}
+
 export default function ShareAudio({currentPlaySong}) {
     const user = getLocalStorage("tempUser");
     const desc = useRef();
@@ -48,7 +67,7 @@ export default function ShareAudio({currentPlaySong}) {
     };
 
     return (
-            <div className="shareWrapper">
+            <div className="shareWrapperInPost">
                 <div className="shareTop">
                     <Avatar
                         size={42}
@@ -70,21 +89,48 @@ export default function ShareAudio({currentPlaySong}) {
                 </div>
                 <hr className="shareHr" />
                 {currentPlaySong && (
-                    <div className="shareImgContainer">
-                        <MusicPlayer
-                        inPost={true}
-                        name={currentPlaySong.audio_name}
-                        artist={currentPlaySong.created_by}
-                        song={`http://localhost:8001/static/audio/${currentPlaySong.audio_name}.mp3`}
-                        />
-                    </div>
+                    <div className="musicPlayerInPost">
+                        <Row style={{
+                            height: "100%",
+                            justifyContent: "center",
+                            alignItems: "center"
+                        }}>
+                            <Col span={8}>
+                                <Row style={{gap: "10px"}}>
+                                    <div
+                                        style={{
+                                            backgroundColor: "#fde3cf",
+                                            width: "64px",
+                                            height: "64px",
+                                            borderRadius: "4px",
+                                            cursor: "pointer",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "center"
+                                        }}
+                                    >
+                                        <Col>
+                                            <MusicNoteIcon className='themeColor2'/>
+                                        </Col>
+                                    </div>
+                                    <div style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
+                                        <div style={title} className="underlinedWhenHovered">{currentPlaySong.audio_name}</div>
+                                        <div style={subtitle}>{currentPlaySong.created_by}</div>
+                                    </div> 
+                                </Row>
+                            </Col>
+                            <Col span={16} style={{
+                                display: "flex",
+                                justifyContent: "flex-end",
+                            }}>
+                                <button className="musicPlayerInPostBtn">Click here to Listen!</button>
+                            </Col>
+                    </Row>
+                </div>
                 )}
-                <form className="shareBottom" onSubmit={submitHandler}>
-                    <div className="shareOptions">
-                
-                    </div>
+                <form className="shareBottomInPost" onSubmit={submitHandler}>
                      <button className="shareButton" type="submit" style={{backgroundColor: "#0f2f56", padding: "10px 15px"}}>
-                        Share
+                        Post
                     </button> 
                 </form>
             </div>

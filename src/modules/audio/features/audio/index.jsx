@@ -217,6 +217,8 @@ function AudioPage() {
         okText="Later"
         onCancel={onCancelShare}
         width={1000}
+        cancelButtonProps={{ style: { display: "none" } }}
+        okButtonProps={{ style: { display: "none" } }}
       >
         {isOpenShare && shareSong && <ShareAudio currentPlaySong={shareSong}/>}
       </ModalContainer>

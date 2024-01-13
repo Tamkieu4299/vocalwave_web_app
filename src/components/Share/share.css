@@ -11,6 +11,10 @@
     padding: 24px;
 }
 
+.shareWrapperInPost {
+    padding: 24px 24px 0 24px;
+}
+
 .shareTop {
     display: flex;
     align-items: center;
@@ -43,6 +47,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.shareBottomInPost {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 30px;
 }
 
 .shareOptions {
