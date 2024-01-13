@@ -1,7 +1,7 @@
 import "./profile.css";
 import Topbar from "../components/topbar/Topbar";
 import Details from "../components/detail/Details";
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useEffect, useContext, useRef, useMemo } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
 import { Avatar } from "antd";
@@ -43,12 +43,11 @@ export default function DriverPage() {
     //     };
     //     fetchUser();
     // }, [username]);
-
     return (
         <>
             <div className="profile">
                 <div className="profileTop">
-                    <img
+                    {/* <img
                         className="profileCoverImg"
                         // src={
                         //     viewUser.coverPicture
@@ -56,7 +55,7 @@ export default function DriverPage() {
                         //         : PF + "person/noCover.png"
                         // }
                         alt=""
-                    />
+                    /> */}
                     <Avatar className="profileUserImg"
                     // src={
                     //     viewUser.profilePicture
@@ -65,9 +64,8 @@ export default function DriverPage() {
                     // }
                     >{user?.name?.charAt(0)?.toUpperCase()}</Avatar>
                     <div className="profileUsername">{user?.name}</div>
-                    <div className="profileDescription">{"22 songs uploaded"}</div>
                 </div>
-                <div className="profileBottom">
+            <div className="profileBottom">
                     <Details user={viewUser} />
                     <div className="profileUserPosts">
                             {listPosts?.map((data, index) => {

@@ -3,7 +3,7 @@ import request from "../../../utils/request";
 
 function useUpdateDriver(options) {
   return useMutation(
-    async ({ id, body }) => request.post(`user/update-playlist/${id}`, body),
+    async ({ id, body }) => request.post(`user/update-user-info/${id}`, body),
     options
   );
 }

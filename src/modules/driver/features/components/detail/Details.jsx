@@ -9,7 +9,10 @@ import axios from "axios";;
 import { Add, Remove } from "@material-ui/icons";
 import { useNavigate } from "react-router-dom";
 import { Avatar, Modal } from "antd";
-import { getLocalStorage } from "../../../../../utils/storage";
+import { getLocalStorage, setLocalStorage } from "../../../../../utils/storage";
+import useUpdateDriver from "../../../services/useUpdateDriver";
+import { displaySuccessMessage } from "../../../../../utils/request";
+import { TEXT } from "../../../../../localization/en";
 
 export default function Details({ user }) {
     const [form] = useForm();
@@ -33,11 +36,38 @@ export default function Details({ user }) {
     const currentUser = getLocalStorage('tempUser');
     const navigate = useNavigate();
 
-    const onSubmit = () => {
-        const value = form.getFieldValue();
-        console.log(value);
-        const value2 = form2.getFieldValue();
-        console.log(value2);
+    // const onSubmit = () => {
+    //     const value = form.getFieldValue();
+    //     console.log(value);
+    //     const value2 = form2.getFieldValue();
+    //     console.log(value2);
+    // }
+
+    const { mutateAsync: updateDriver, isLoading: isUpdate } = useUpdateDriver({
+        onSuccess: () => {
+          displaySuccessMessage(TEXT.message.update_success);
+        },
+      });
+
+    const onSubmitBio = async () => {
+        const update_user = await updateDriver({
+            id: currentUser.user_id,
+            body: form.getFieldValue(),
+          });
+        currentUser.bio = update_user.bio
+        setLocalStorage("tempUser", currentUser);
+        setIsOpen(false)
+    }
+
+    const onSubmitProfile = async () => {
+        const update_user = await updateDriver({
+            id: currentUser.user_id,
+            body: form2.getFieldValue(),
+          });
+        currentUser.name = update_user.name
+        setLocalStorage("tempUser", currentUser);
+        setIsOpen2(false)
+        window.location.reload()
     }
 
     useEffect(() => {
@@ -166,7 +196,7 @@ export default function Details({ user }) {
                     About
                 </div>
                 <div className="detailQuote">
-                    {"[Quote]"}
+                    {currentUser?.bio ? currentUser.bio : "[Quote]"}
                 </div>
                 <button
                     className="detailButton"
@@ -175,7 +205,7 @@ export default function Details({ user }) {
                 >
                     Edit Bio
                 </button>
-                <div className="detailInfo">
+                {/* <div className="detailInfo">
                     <div className="detailInfoItem">
                         <span className="detailInfoKey">City:</span>
                         <span className="detailInfoValue">{user.city}</span>
@@ -194,7 +224,7 @@ export default function Details({ user }) {
                                 : "-"}
                         </span>
                     </div>
-                </div>
+                </div> */}
                 <button
                     className="detailButton"
                     onClick={() => setIsOpen2(true)}
@@ -203,7 +233,7 @@ export default function Details({ user }) {
                     Edit profile
                 </button>
                 <div className="detailTitle">
-                    Friends
+                    People
                 </div>
                 <Avatar.Group maxCount={6} size={53}>
                     <Avatar className="detailFriends" size={53}>A</Avatar>
@@ -220,7 +250,7 @@ export default function Details({ user }) {
                         <Avatar key={index}></Avatar>
                     ))} */}
                 </Avatar.Group>
-                <div className="detailTitle">
+                {/* <div className="detailTitle">
                     Featured Songs
                 </div>
                 <div className="detailFeatured">
@@ -239,7 +269,7 @@ export default function Details({ user }) {
                             {"[Song Name]"}
                         </div>
                     </div>
-                </div>
+                </div> */}
                 {user.username === currentUser.username && (
                     <ModalContainer 
                         title={"Edit Bio"}
@@ -253,7 +283,7 @@ export default function Details({ user }) {
                         }}
                         okText={"Confirm"}
                     >
-                        <ModalBioDetail form={form} onSubmit={onSubmit} />
+                        <ModalBioDetail form={form} onSubmit={onSubmitBio} />
                     </ModalContainer>
                 )}
                 {user.username === currentUser.username && (
@@ -261,7 +291,7 @@ export default function Details({ user }) {
                         title={"Edit Profile"}
                         open={isOpen2}
                         onCancel={() => setIsOpen2(false)}
-                        onOk={() => form.submit()}
+                        onOk={() => form2.submit()}
                         cancelButtonProps={{ style: { padding: "0 15px" } }}
                         okButtonProps={{
                             className: "backgroundThemeColor",
@@ -269,7 +299,7 @@ export default function Details({ user }) {
                         }}
                         okText={"Confirm"}
                     >
-                        <ModalInfoDetail form={form2} onSubmit={onSubmit} />
+                        <ModalInfoDetail form={form2} onSubmit={onSubmitProfile} />
                     </ModalContainer>
                 )}
                 <div className="rightbarFollowings">

@@ -22,7 +22,7 @@ function ModalInfoDetail({ form, onSubmit }) {
       <Form.Item name="name" label={label.name}>
         <Input />
       </Form.Item>
-      <Form.Item name="user" label={label.user}>
+      {/* <Form.Item name="user" label={label.user}>
         <Input />
       </Form.Item>
       <Form.Item name="phone" label={label.phone}>
@@ -87,7 +87,7 @@ function ModalInfoDetail({ form, onSubmit }) {
           }}
           >Click to Upload</Button>
         </Upload>
-      </Form.Item>
+      </Form.Item> */}
     </Form>
   );
 }

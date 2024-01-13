@@ -137,9 +137,11 @@ function AudioPage() {
     }
   };
   const onSearch = () => {
-    refetch();
+    if(searchParams.get('name'))
+      setAudioList(listAudio.filter(a => a.audio_name.startsWith(searchParams.get('name'))))
+    else setAudioList(listAudio)
   };
-  console.log(listAudio);
+
   return (
     <>
       <Row style={{padding: "15px"}}>
@@ -147,18 +149,18 @@ function AudioPage() {
           <SearchDriver onSearch={onSearch} />
         </Col>
         <Col span={12} className="text-right">
-          <Button
+        {editPermission && deletePermission && <Button
             className="backgroundThemeColor"
             onClick={() => handleOpenDetail()}
           >
             <Typography className="text-white">
               {TEXT.button.addNew}
             </Typography>
-          </Button>
+          </Button>}
         </Col>
       </Row>
 
-      {editPermission && deletePermission && <TableAudio
+      {editPermission && deletePermission && audioList && <TableAudio
         loading={isLoading}
         columns={columns({
           handlePlayDetail,
