@@ -181,7 +181,7 @@ function AudioPage() {
         </Col>
       </Row>
 
-      {editPermission && deletePermission && audioList && <TableAudio
+      {audioList && <TableAudio
         loading={isLoading}
         columns={columns({
           handlePlayDetail,
@@ -220,7 +220,7 @@ function AudioPage() {
       >
         {isOpenShare && shareSong && <ShareAudio currentPlaySong={shareSong}/>}
       </ModalContainer>
-      {(!editPermission || !deletePermission) && <TrackTable tracklist={audioList} onPlay={handlePlayDetail}/>}
+      {/* {(!editPermission || !deletePermission) && <TrackTable tracklist={audioList} onPlay={handlePlayDetail}/>} */}
       {currentPlaySong && (
         <MusicPlayer
           name={currentPlaySong.audio_name}

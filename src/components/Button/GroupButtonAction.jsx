@@ -29,7 +29,7 @@ function GroupButtonAction({ onPlay, onEdit, onDelete, canDelete = true, onShare
           icon={<ShareAltOutlined style={{display: "block"}}/>}
           style={{height: "16px", display: "block"}}
           className="text-base themeColor"
-        />
+      />
       {deletePermission && canDelete && (
         <IconButton
           onClick={onDelete}
