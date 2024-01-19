@@ -225,7 +225,7 @@ function AudioPage() {
         <MusicPlayer
           name={currentPlaySong.audio_name}
           artist={currentPlaySong.created_by}
-          song={`http://localhost:8001/static/audio/${currentPlaySong.audio_name}.mp3`}
+          song={`http://69.161.221.127:8001/static/audio/${currentPlaySong.audio_name}.mp3`}
         />
       )}
     </>
