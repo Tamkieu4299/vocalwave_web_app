@@ -137,7 +137,7 @@ return (
           </Row>
           {uploaded_link && 
             <Row>
-              {uploaded_link && uploaded_link.includes(".jpg") && <img src={`http://localhost:8001/static/image/${uploaded_link}`} alt="Your Image Alt Text" style={{ maxWidth: '80%', height: 'auto' }} />}
+              {uploaded_link && uploaded_link.includes(".jpg") && <img src={`http://69.161.221.127:8001/static/image/${uploaded_link}`} alt="Your Image Alt Text" style={{ maxWidth: '80%', height: 'auto' }} />}
             </Row> 
           }
           {song && <div className="musicPlayerInPost">
