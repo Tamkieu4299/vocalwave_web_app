@@ -86,9 +86,17 @@ const playlistPage = {
   title: TEXT.playlist.playlist,
   icon: <UnorderedListOutlined />,
 };
+const assignmentPage = {
+  path: "/assignment-management",
+  component: lazy(() =>
+    delayRoute()(import("../modules/assignment/features/assignment"))
+  ),
+  title: LABEL.assignment,
+  icon: <AudioOutlined />,
+};
 
 export const publicRoutesData = [loginPage, registerPage];
-export const privateRouteData = [homePage, driverPage, audioPage];
+export const privateRouteData = [assignmentPage];
 
 const publicRoutes = () => {
   return publicRoutesData.map((route, index) => {
