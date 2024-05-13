@@ -12,6 +12,7 @@ export const LABEL = {
   //Menu
   dashBoard: "News",
   audio: "Songs",
+  assignment: "Assignment",
   //Track table
   trackTable: {
     song: "Song",

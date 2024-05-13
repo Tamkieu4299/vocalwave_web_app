@@ -75,7 +75,7 @@ function AppHeader({ title }) {
         <Col>
           <Title className="text-left pt-2 m-0" style={{ color: "#fff" }}>
               <NavLink to={"/"} style={{color: "white"}}>
-                  VocalWave
+                  Nothing Auto
               </NavLink>
           </Title>
         </Col>
