@@ -86,6 +86,10 @@ export const TEXT = {
     image: "Image",
     file: "File",
   },
+  assignment: {
+    assignment: "Assignment",
+    name: "Name",
+  },
   playlist: {
     playlist: "Playlist",
     price: "Price",

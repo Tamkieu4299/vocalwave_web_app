@@ -14,7 +14,7 @@ function AppLayout({ children, title }) {
         >
           {children}
         </div>
-        <Dialog title={title}/>
+        {/* <Dialog title={title}/> */}
       </Layout>
     </Layout>
   );

@@ -29,9 +29,9 @@ export function createRequestInterceptor() {
     const { headers } = baseConfig;
     const newHeaders = {
       ...headers,
-      Authorization: getLocalStorage("access_token"),
+      Authorization: getLocalStorage("tempUser") ? `Bearer ${getLocalStorage("tempUser")["access_token"]}` : "",
     };
-
+    console.log(newHeaders)
     return {
       ...config,
       headers: newHeaders,
@@ -141,7 +141,7 @@ request.interceptors.response.use(
   createHandlerChain([
     serverErrorHandler,
     userErrorHandler,
-    unauthorizedErrorHandler,
+    // unauthorizedErrorHandler,
     requestErrorHandler,
   ])
 );

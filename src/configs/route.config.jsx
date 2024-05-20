@@ -87,7 +87,7 @@ const playlistPage = {
   icon: <UnorderedListOutlined />,
 };
 const assignmentPage = {
-  path: "/assignment-management",
+  path: "/",
   component: lazy(() =>
     delayRoute()(import("../modules/assignment/features/assignment"))
   ),

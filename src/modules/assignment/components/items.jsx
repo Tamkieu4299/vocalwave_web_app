@@ -1,13 +1,7 @@
 import { noop } from "lodash";
 import GroupButtonAction from "../../../components/Button/GroupButtonAction";
-import dayjs from "dayjs";
-export const initAudioValues = {
-  audio_name: "",
-  durations: "",
-  link: "",
-  type: "",
-  image_id: "",
-  file: null,
+export const initAssignmentValues = {
+  name: "",
 };
 
 export const columns = ({
@@ -18,8 +12,8 @@ export const columns = ({
 }) => [
   {
     title: "Index",
-    dataIndex: "audio_id",
-    key: "audio_id",
+    dataIndex: "id",
+    key: "id",
     render: (id, record, index) => {
       ++index;
       return index;
@@ -28,43 +22,17 @@ export const columns = ({
   },
   {
     title: "Name",
-    dataIndex: "audio_name",
-    key: "audio_name",
-    sorter: (a, b) => a.audio_name.length - b.audio_name.length,
+    dataIndex: "name",
+    key: "name",
+    sorter: (a, b) => a.name.length - b.name.length,
   },
   {
-    title: "Durations",
-    dataIndex: "durations",
-    key: "durations",
-    sorter: (a, b) => parseInt(a.durations) - parseInt(b.durations),
+    title: "Number of Questions",
+    dataIndex: "num_of_questions",
+    render: (id, record, index) => {
+      return record.questions.length;
+    },
   },
-
-  {
-    title: "Updated at",
-    dataIndex: "updated_at",
-    key: "updated_at",
-    render: (record) => dayjs(record.updated_at).format("DD-MM-YYYY HH:mm"),
-
-    sorter: (a, b) =>
-      new Date(a.updated_at).getTime() - new Date(b.updated_at).getTime(),
-  },
-  {
-    title: "Created by",
-    dataIndex: "created_by",
-    key: "created_by",
-    filters: [
-      {
-        text: "admin",
-        value: "admin",
-      },
-      {
-        text: "operator",
-        value: "operator",
-      },
-    ],
-    onFilter: (value, record) => record.created_by.indexOf(value) === 0,
-  },
-
   {
     title: "Actions",
     key: "action",
