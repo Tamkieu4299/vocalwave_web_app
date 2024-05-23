@@ -94,9 +94,15 @@ const assignmentPage = {
   title: LABEL.assignment,
   icon: <AudioOutlined />,
 };
+const summaryPage = {
+  path: "/summary/:id",
+  component: lazy(() => delayRoute()(import("../modules/summary/features/summary"))),
+  title: "Summary Detail Page",
+  icon: <UnorderedListOutlined />,  // Example icon, change as needed
+};
 
 export const publicRoutesData = [loginPage, registerPage];
-export const privateRouteData = [assignmentPage];
+export const privateRouteData = [assignmentPage, summaryPage];
 
 const publicRoutes = () => {
   return publicRoutesData.map((route, index) => {

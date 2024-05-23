@@ -5,10 +5,9 @@ export const initAssignmentValues = {
 };
 
 export const columns = ({
-  handlePlayDetail = noop,
+  handleViewSummary = noop,
   handleOpenDetail = noop,
   handleOpenDelete = noop,
-  handleOpenShare= noop,
 }) => [
   {
     title: "Index",
@@ -40,10 +39,9 @@ export const columns = ({
     width: 100,
     render: (_text, record) => (
       <GroupButtonAction
-        onPlay = {() => handlePlayDetail(record.audio_id)}
+        onPlay = {() => handleViewSummary(record.id)}
         onEdit={() => handleOpenDetail(record.audio_id)}
         onDelete={() => handleOpenDelete(record.audio_id)}
-        onShare={() => handleOpenShare(record.audio_id)}
       />
     ),
   },

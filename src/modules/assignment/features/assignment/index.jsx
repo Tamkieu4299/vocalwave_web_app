@@ -16,9 +16,11 @@ import { Button, Col, Row, Typography } from "antd";
 import useUpdateAudio from "../../services/useUpdateAudio";
 import useFetchAllAssignment from "../../services/useFetchAllAssignment";
 import useCreateAssignment from "../../services/useCreateAssignment";
+import { useNavigate } from "react-router";
 
 function AudioPage() {
   const [form] = useForm();
+  const navigate = useNavigate();
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -50,6 +52,11 @@ function AudioPage() {
   const handlePlayDetail = useCallback((id = -1) => {
     setModalDetailId(id)
   }, []);
+
+  const handleViewSummary = (id = 1) => {
+    console.log("here")
+    navigate(`/summary/${id}`)
+  }
 
   const onCancel = useCallback(() => {
     setModalDetailId(null);
@@ -130,7 +137,7 @@ function AudioPage() {
       {listAssignment && <TableAudio
         loading={isLoading}
         columns={columns({
-          handlePlayDetail,
+          handleViewSummary,
           handleOpenDetail,
           handleOpenDelete: openModalDelete,
         })}

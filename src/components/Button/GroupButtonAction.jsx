@@ -12,7 +12,7 @@ function GroupButtonAction({ onPlay, onEdit, onDelete, canDelete = true, onShare
     <Row className="gap-2" style={{alignItems: "center"}}>
       <Button
         type="primary"
-        // onClick={() => navigate("/")}
+        onClick={onPlay}
       >
         <Typography className="text-white">
           {"View"}

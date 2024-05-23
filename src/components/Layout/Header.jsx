@@ -81,11 +81,10 @@ function AppHeader({ title }) {
         </Col>
         <Col>
           <Nav>
-            {privateRouteData.map((item, index) => (
-                <NavLink className="nav-btn" key={index} to={item.path} style={title === item.title ? {color: "#46cce3"} : {color: "white"}}>
-                  {item.title.toUpperCase()}
-                </NavLink>
-            ))}
+            {privateRouteData.map((item, index) => {
+                if(item.title !== "Summary Detail Page")
+                  return <NavLink className="nav-btn" key={index} to={item.path} style={title === item.title ? {color: "#46cce3"} : {color: "white"}}>{item.title.toUpperCase()}</NavLink>
+            })}
           </Nav>
         </Col>
         <Col style={{ textAlign: "right", cursor: "pointer" }}>
