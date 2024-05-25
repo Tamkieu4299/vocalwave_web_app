@@ -1,41 +1,32 @@
 import ModalContainer from "@/components/Modal/containers/ModalContainer";
 import { useForm } from "antd/es/form/Form";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import useDetailActionType from "../../../../hooks/useDetailActionType";
 import { TEXT } from "../../../../localization/en";
 import ModalDetailAudio from "../../components/ModalDetail";
+import ModalEvaluation from "../../components/ModalEvaluation";
 import TableAudio from "../../components/TableAudio";
 import { columns } from "../../components/items";
 import { displaySuccessMessage } from "../../../../utils/request";
-import useFetchAudio from "../../services/useFetchAudio";
 import useDeleteAudio from "../../services/useDeleteAudio";
 import useModal from "../../../../hooks/useModal";
-import { useSearchParams } from "react-router-dom";
 import SearchDriver from "../../../driver/features/components/Search";
 import { Button, Col, Row, Typography } from "antd";
-import useUpdateAudio from "../../services/useUpdateAudio";
 import useFetchAllAssignment from "../../services/useFetchAllAssignment";
 import useCreateAssignment from "../../services/useCreateAssignment";
 import { useNavigate } from "react-router";
+import useRunEvaProcess from "../../services/useRunEvaProcess";
 
 function AudioPage() {
   const [form] = useForm();
   const navigate = useNavigate();
 
-  const [searchParams, setSearchParams] = useSearchParams();
-
   const [modalDetailId, setModalDetailId] = useState(null);
 
   const [isOpenModal, setIsOpenModal] = useState(false);
 
-
-
+  const [isOpenModalEva, setIsOpenModalEva] = useState(false);
   const { isNew, isEdit } = useDetailActionType(modalDetailId);
-
-  useEffect(() => {
-    searchParams.get('audio_id') && handlePlayDetail(searchParams.get('audio_id'))
-    setSearchParams("")
-  }, [searchParams])
 
   //Title modal
   const title = useMemo(() => {
@@ -49,28 +40,37 @@ function AudioPage() {
     setIsOpenModal(true), setModalDetailId(id);
   }, []);
 
-  const handlePlayDetail = useCallback((id = -1) => {
+  const handleOpenModalEva = useCallback((id = -1) => {
+    setIsOpenModalEva(true)
     setModalDetailId(id)
-  }, []);
+  }, [])
 
   const handleViewSummary = (id = 1) => {
-    console.log("here")
     navigate(`/summary/${id}`)
+  }
+
+  const handleViewQuestion = (id = 1) => {
+    navigate(`/question/${id}`)
+  }
+
+  const handleProcessAnswer = (id = 1) => {
+    console.log("submit")
   }
 
   const onCancel = useCallback(() => {
     setModalDetailId(null);
     setIsOpenModal(false);
+    setIsOpenModalEva(false)
     form.resetFields();
   }, [form]);
 
   const { data: listAssignment, isLoading, refetch } = useFetchAllAssignment({});
   
-  const { isLoading: isFetchAudio } = useFetchAudio(modalDetailId, {
-    enabled: Boolean(modalDetailId && modalDetailId !== -1),
-    onSuccess: (rs) => {
-      !isOpenModal && setModalDetailId(null);
-      isOpenModal && form.setFieldsValue(rs)
+  const { mutateAsync: runEva, isLoading: isEvaRun } = useRunEvaProcess({
+    onSuccess: () => {
+      refetch();
+      onCancel();
+      displaySuccessMessage(TEXT.message.create_success);
     },
   });
 
@@ -82,7 +82,7 @@ function AudioPage() {
     },
   });
 
-  const { openModalDelete, onCloseModal } = useModal({
+  const { onCloseModal } = useModal({
     onDeleteOk: deleteAudio,
   });
 
@@ -94,18 +94,21 @@ function AudioPage() {
     },
   });
 
-  const { isLoading: isUpdate } = useUpdateAudio({
-    onSuccess: () => {
-      refetch();
-      onCancel();
-      displaySuccessMessage(TEXT.message.update_success);
-    },
-  });
+  const onSubmitProcessEva = async () => {
+    const value = form.getFieldValue();
+    const { file } = value;
+    const formData = new FormData();
+    formData.append("file", file.file.originFileObj);
+    formData.append(
+      "student_answer_data",
+      JSON.stringify({ "assignment_id": modalDetailId })
+    );
+    await runEva(formData);
+    
+  };
 
   const onSubmit = async () => {
     const value = form.getFieldValue();
-    console.log(value);
-
     if (isNew) {
       await createAssignment(value);
     }
@@ -138,18 +141,18 @@ function AudioPage() {
         loading={isLoading}
         columns={columns({
           handleViewSummary,
-          handleOpenDetail,
-          handleOpenDelete: openModalDelete,
+          handleViewQuestion,
+          handleOpenModalEva,
         })}
         dataSource={listAssignment}
         rowKey="id"
       />}
+
       <ModalContainer
         title={title}
-        loading={isFetchAudio}
         open={isOpenModal}
         onOk={() => form.submit()}
-        confirmLoading={isCreate || isUpdate}
+        confirmLoading={isCreate}
         okText={TEXT.button.ok}
         onCancel={onCancel}
         cancelButtonProps={{ style: { padding: "0 15px" } }}
@@ -161,6 +164,25 @@ function AudioPage() {
         width={600}
       >
         <ModalDetailAudio form={form} onSubmit={onSubmit} isNew={isNew} />
+      </ModalContainer>
+
+      <ModalContainer
+        title={"Run Process Evaluation"}
+        loading={isEvaRun}
+        open={isOpenModalEva}
+        onOk={() => form.submit()}
+        confirmLoading={isCreate}
+        okText={TEXT.button.ok}
+        onCancel={onCancel}
+        cancelButtonProps={{ style: { padding: "0 15px" } }}
+        okButtonProps={{
+          className: "backgroundThemeColor",
+          style: { padding: "0 15px" },
+        }}
+        cancelText={TEXT.button.cancel}
+        width={600}
+      >
+        <ModalEvaluation form={form} onSubmit={onSubmitProcessEva} isNew={isNew} />
       </ModalContainer>
     </>
   );

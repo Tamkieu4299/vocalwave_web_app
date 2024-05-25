@@ -100,9 +100,15 @@ const summaryPage = {
   title: "Summary Detail Page",
   icon: <UnorderedListOutlined />,  // Example icon, change as needed
 };
+const questionPage = {
+  path: "/question/:id",
+  component: lazy(() => delayRoute()(import("../modules/question/features/question"))),
+  title: "Question Page",
+  icon: <UnorderedListOutlined />,  // Example icon, change as needed
+};
 
 export const publicRoutesData = [loginPage, registerPage];
-export const privateRouteData = [assignmentPage, summaryPage];
+export const privateRouteData = [assignmentPage, summaryPage, questionPage];
 
 const publicRoutes = () => {
   return publicRoutesData.map((route, index) => {

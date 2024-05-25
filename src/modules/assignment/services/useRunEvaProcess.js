@@ -1,14 +1,14 @@
 import { useMutation } from "react-query";
 import request from "../../../utils/request";
 
-function useCreateAudio(options) {
+function useRunEvaProcess(options) {
   return useMutation(
     (data) =>
-      request.post("audio/create", data, {
+      request.post("auto/auto-grader", data, {
         headers: { "Content-Type": "multipart/form-data" },
       }),
     options
   );
 }
 
-export default useCreateAudio;
+export default useRunEvaProcess;

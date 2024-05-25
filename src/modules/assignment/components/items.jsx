@@ -6,8 +6,8 @@ export const initAssignmentValues = {
 
 export const columns = ({
   handleViewSummary = noop,
-  handleOpenDetail = noop,
-  handleOpenDelete = noop,
+  handleViewQuestion = noop,
+  handleOpenModalEva = noop
 }) => [
   {
     title: "Index",
@@ -39,9 +39,9 @@ export const columns = ({
     width: 100,
     render: (_text, record) => (
       <GroupButtonAction
-        onPlay = {() => handleViewSummary(record.id)}
-        onEdit={() => handleOpenDetail(record.audio_id)}
-        onDelete={() => handleOpenDelete(record.audio_id)}
+        onViewSummary = {() => handleViewSummary(record.id)}
+        onViewQuestion = {() => handleViewQuestion(record.id)}
+        onRunEva={() => {handleOpenModalEva(record.id)}}
       />
     ),
   },

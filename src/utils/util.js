@@ -72,6 +72,8 @@ export const fileMusicPattern =
 export const fileImagePattern =
   /^(image\/jpeg|image\/png|image\/gif|image\/bmp|image\/tiff|image\/webp)$/;
 
+export const fileZipPattern = /^(application\/zip|application\/x-zip-compressed|multipart\/x-zip)$/;
+
 export const checkFile = (file) => {
   const { type } = file;
 
@@ -83,13 +85,24 @@ export const checkFile = (file) => {
   return isMusicFile;
 };
 
+export const checkZipFile = (file) => {
+  const { type } = file;
+
+  const isZipfile = fileZipPattern.test(type);
+
+  if (!isZipfile) {
+    message.error("Must be a zip file");
+  }
+  return isZipfile;
+};
+
 export const checkImageFile = (file) => {
   const { type } = file;
 
   const isImageFile = fileImagePattern.test(type);
 
   if (!isImageFile) {
-    message.error("Upload wrong file");
+    message.error("Must be an image file")
   }
   return isImageFile;
 };

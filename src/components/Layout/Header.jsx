@@ -31,6 +31,7 @@ const Nav = styled.nav`
   align-items: center;
 `;
 
+const hideItems = ["Summary Detail Page", "Question Page"]
 function AppHeader({ title }) {
   const { logout } = useLogout();
   const user = getLocalStorage("tempUser");
@@ -75,14 +76,14 @@ function AppHeader({ title }) {
         <Col>
           <Title className="text-left pt-2 m-0" style={{ color: "#fff" }}>
               <NavLink to={"/"} style={{color: "white"}}>
-                  Nothing Auto
+                  Auto Eva
               </NavLink>
           </Title>
         </Col>
         <Col>
           <Nav>
             {privateRouteData.map((item, index) => {
-                if(item.title !== "Summary Detail Page")
+                if(!(hideItems.includes(item.title)))
                   return <NavLink className="nav-btn" key={index} to={item.path} style={title === item.title ? {color: "#46cce3"} : {color: "white"}}>{item.title.toUpperCase()}</NavLink>
             })}
           </Nav>
