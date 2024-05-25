@@ -53,10 +53,6 @@ function AudioPage() {
     navigate(`/question/${id}`)
   }
 
-  const handleProcessAnswer = (id = 1) => {
-    console.log("submit")
-  }
-
   const onCancel = useCallback(() => {
     setModalDetailId(null);
     setIsOpenModal(false);

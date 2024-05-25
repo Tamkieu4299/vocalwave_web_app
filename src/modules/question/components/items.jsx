@@ -1,7 +1,8 @@
-import { noop } from "lodash";
-import GroupButtonAction from "../../../components/Button/GroupButtonAction";
-export const initAssignmentValues = {
-  name: "",
+export const initQuestionValues = {
+  question_title: "",
+  instruction: null,
+  criteria: null
+
 };
 
 export const columns = () => [

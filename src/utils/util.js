@@ -74,6 +74,8 @@ export const fileImagePattern =
 
 export const fileZipPattern = /^(application\/zip|application\/x-zip-compressed|multipart\/x-zip)$/;
 
+export const fileTxtPattern = /\.(txt)$/;
+
 export const checkFile = (file) => {
   const { type } = file;
 
@@ -94,6 +96,15 @@ export const checkZipFile = (file) => {
     message.error("Must be a zip file");
   }
   return isZipfile;
+};
+
+export const checkTxtFile = (file) => {
+  const { type } = file;
+  if (type !== "text/plain") {
+    message.error("Must be a text file");
+    return false
+  }
+  return true;
 };
 
 export const checkImageFile = (file) => {

@@ -1,11 +1,11 @@
-import { Form, Input, Upload, Button, Typography } from "antd";
+import { Form, Upload, Button, Typography } from "antd";
 import PropTypes from "prop-types";
 import { initAssignmentValues } from "./items";
 import { TEXT } from "../../../localization/en";
 import { UploadOutlined } from "@ant-design/icons";
 import { checkZipFile } from "../../../utils/util";
 
-function ModalEvaluation({ form, onSubmit, isNew }) {
+function ModalEvaluation({ form, onSubmit }) {
   const label = TEXT.assignment;
   const required = TEXT.required;
 
